@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "dKFpBHs6AaFZ4bIa6oLIfmG03iscanGU+rVzj4z9BV8LXgp7o7ezboVkR/X98hmP+BlMIKw9h88GFUWif3LlTw==",
+  "dgSpecHash": "D2KeL3AIp+5phKBP5bjN0SZJEAldLaHxNbGif8VLDGBJFACy9kkEZOQL1cdF6RQa7KFmOZOe4pu6xnS/PHK8JA==",
   "success": true,
-  "projectFilePath": "C:\\Users\\mathi\\UPC\\CICLO V\\Aplicaciones Web\\MI Projectos Backend\\BackendCambiazo\\Backend\\Backend.csproj",
+  "projectFilePath": "C:\\Users\\mathi\\Documents\\GitHub\\BackendCambiazo\\Backend\\Backend.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\mathi\\.nuget\\packages\\bcrypt.net-next\\4.0.3\\bcrypt.net-next.4.0.3.nupkg.sha512",
     "C:\\Users\\mathi\\.nuget\\packages\\bouncycastle.cryptography\\2.2.1\\bouncycastle.cryptography.2.2.1.nupkg.sha512",

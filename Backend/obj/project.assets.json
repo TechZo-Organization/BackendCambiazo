@@ -8613,11 +8613,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\mathi\\UPC\\CICLO V\\Aplicaciones Web\\MI Projectos Backend\\BackendCambiazo\\Backend\\Backend.csproj",
+      "projectUniqueName": "C:\\Users\\mathi\\Documents\\GitHub\\BackendCambiazo\\Backend\\Backend.csproj",
       "projectName": "Backend",
-      "projectPath": "C:\\Users\\mathi\\UPC\\CICLO V\\Aplicaciones Web\\MI Projectos Backend\\BackendCambiazo\\Backend\\Backend.csproj",
+      "projectPath": "C:\\Users\\mathi\\Documents\\GitHub\\BackendCambiazo\\Backend\\Backend.csproj",
       "packagesPath": "C:\\Users\\mathi\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\mathi\\UPC\\CICLO V\\Aplicaciones Web\\MI Projectos Backend\\BackendCambiazo\\Backend\\obj\\",
+      "outputPath": "C:\\Users\\mathi\\Documents\\GitHub\\BackendCambiazo\\Backend\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\mathi\\AppData\\Roaming\\NuGet\\NuGet.Config"
