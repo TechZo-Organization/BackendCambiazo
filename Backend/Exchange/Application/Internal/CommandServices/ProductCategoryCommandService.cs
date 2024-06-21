@@ -44,7 +44,7 @@ public class ProductCategoryCommandService(IProductCategoryRepository productCat
             }
             
             var productCategoryExist = await productCategoryRepository.FindByName(command.Name);
-            if(productCategoryExist != null)
+            if(productCategoryExist != null && productCategoryExist.Id != command.Id)
             {
                 throw new Exception("Product category already exists");
             }
