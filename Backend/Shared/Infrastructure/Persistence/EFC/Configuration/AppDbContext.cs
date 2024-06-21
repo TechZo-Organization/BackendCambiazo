@@ -1,5 +1,7 @@
 using Backend.Donation.Domain.Model.Aggregates;
 using Backend.Donation.Domain.Model.Enitities;
+using Backend.Exchange.Domain.Model.Aggregates;
+using Backend.Exchange.Domain.Model.Enitities;
 using Backend.Shared.Infrastructure.Persistence.EFC.Configuration.Extensions;
 using EntityFrameworkCore.CreatedUpdatedDate.Extensions;
 using Microsoft.EntityFrameworkCore;
@@ -92,11 +94,74 @@ public class AppDbContext(DbContextOptions options) : DbContext(options)
             .HasForeignKey(e => e.OngId)
             .HasPrincipalKey(t => t.Id);
         
+        //product
+        builder.Entity<Product>().ToTable("Products");
+        builder.Entity<Product>().HasKey(e => e.Id);
+        builder.Entity<Product>().Property(e => e.Id).ValueGeneratedOnAdd();
+        builder.Entity<Product>().Property(e => e.Name).IsRequired();
+        builder.Entity<Product>().Property(e => e.Description).IsRequired();
+        builder.Entity<Product>().Property(e => e.ObjectChange).IsRequired();
+        builder.Entity<Product>().Property(e => e.Price).IsRequired();
+        builder.Entity<Product>().Property(e => e.Photo).IsRequired();
+        builder.Entity<Product>().Property(e => e.Boost).IsRequired();
+        builder.Entity<Product>().Property(e => e.Available).IsRequired();
+        builder.Entity<Product>().Property(e => e.UserId).IsRequired();
         
-        
+        //product category
+        builder.Entity<ProductCategory>().ToTable("ProductCategories");
+        builder.Entity<ProductCategory>().HasKey(e => e.Id);
+        builder.Entity<ProductCategory>().Property(e => e.Id).ValueGeneratedOnAdd();
+        builder.Entity<ProductCategory>().Property(e => e.Name).IsRequired();
+            
+        //relationship product and product category
+        builder.Entity<Product>()
+            .HasOne(e => e.Category)
+            .WithMany()
+            .HasForeignKey(e => e.CategoryId)
+            .HasPrincipalKey(t => t.Id);
 
         
-       
+        //country
+        builder.Entity<Country>().ToTable("Countries");
+        builder.Entity<Country>().HasKey(e => e.Id);
+        builder.Entity<Country>().Property(e => e.Id).ValueGeneratedOnAdd();
+        builder.Entity<Country>().Property(e => e.Name).IsRequired();
+        
+        //department
+        builder.Entity<Department>().ToTable("Departments");
+        builder.Entity<Department>().HasKey(e => e.Id);
+        builder.Entity<Department>().Property(e => e.Id).ValueGeneratedOnAdd();
+        builder.Entity<Department>().Property(e => e.Name).IsRequired();
+        
+        //district
+        builder.Entity<District>().ToTable("Districts");
+        builder.Entity<District>().HasKey(e => e.Id);
+        builder.Entity<District>().Property(e => e.Id).ValueGeneratedOnAdd();
+        builder.Entity<District>().Property(e => e.Name).IsRequired();
+        
+        //product and district
+        builder.Entity<Product>()
+            .HasOne(e => e.District)
+            .WithMany()
+            .HasForeignKey(e => e.DistrictId)
+            .HasPrincipalKey(t => t.Id);
+        
+        //relationship department and district
+        builder.Entity<District>()
+            .HasOne(e => e.Department)
+            .WithMany()
+            .HasForeignKey(e => e.DepartmentId)
+            .HasPrincipalKey(t => t.Id);
+        
+        //relationship department and country
+        builder.Entity<Department>()
+            .HasOne(e => e.Country)
+            .WithMany()
+            .HasForeignKey(e => e.CountryId)
+            .HasPrincipalKey(t => t.Id);
+        
+        
+        
         // Apply SnakeCase Naming Convention
         builder.UseSnakeCaseWithPluralizedTableNamingConvention();
     }
