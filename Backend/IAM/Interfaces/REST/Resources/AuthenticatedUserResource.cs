@@ -1,6 +1,3 @@
 namespace Backend.IAM.Interfaces.REST.Resources;
 
-public class AuthenticatedUserResource
-{
-    
-}
+public record AuthenticatedUserResource(int Id, string Email, string Token);

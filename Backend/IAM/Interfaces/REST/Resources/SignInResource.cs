@@ -1,6 +1,3 @@
 namespace Backend.IAM.Interfaces.REST.Resources;
 
-public class SignInResource
-{
-    
-}
+public record SignInResource(string Email, string Password);

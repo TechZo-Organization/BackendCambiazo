@@ -1,6 +1,3 @@
 namespace Backend.IAM.Interfaces.REST.Resources;
 
-public class UserResource
-{
-    
-}
+public record UserResource(int Id, string Email);
