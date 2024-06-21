@@ -1,6 +1,3 @@
 namespace Backend.IAM.Domain.Model.Commands;
 
-public class SignInCommand
-{
-    
-}
+public record SignInCommand(string Email, string Password);
