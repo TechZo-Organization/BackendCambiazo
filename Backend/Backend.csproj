@@ -33,7 +33,6 @@
       <Folder Include="IAM\Application\Internal\CommandServices\" />
       <Folder Include="IAM\Application\Internal\OutboundServices\" />
       <Folder Include="IAM\Application\Internal\QueryServices\" />
-      <Folder Include="Profiles\Interfaces\REST\Transform\" />
     </ItemGroup>
 
 </Project>
