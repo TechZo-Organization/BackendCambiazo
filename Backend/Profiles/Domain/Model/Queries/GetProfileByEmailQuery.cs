@@ -1,6 +1,5 @@
+using Backend.Profiles.Domain.Model.ValueObjects;
+
 namespace Backend.Profiles.Domain.Model.Queries;
 
-public class GetProfileByEmailQuery
-{
-    
-}
+public record GetProfileByEmailQuery(EmailAddress Email);

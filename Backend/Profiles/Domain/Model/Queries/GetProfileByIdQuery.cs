@@ -1,6 +1,3 @@
 namespace Backend.Profiles.Domain.Model.Queries;
 
-public class GetProfileByIdQuery
-{
-    
-}
+public record GetProfileByIdQuery(int ProfileId);
