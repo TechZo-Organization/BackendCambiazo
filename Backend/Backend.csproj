@@ -33,7 +33,6 @@
       <Folder Include="IAM\Application\Internal\CommandServices\" />
       <Folder Include="IAM\Application\Internal\OutboundServices\" />
       <Folder Include="IAM\Application\Internal\QueryServices\" />
-      <Folder Include="Profiles\Domain\Repositories\" />
       <Folder Include="Profiles\Domain\Services\" />
       <Folder Include="Profiles\Infrastructure\Persistence\EFC\Repositories\" />
       <Folder Include="Profiles\Interfaces\ACL\Services\" />
