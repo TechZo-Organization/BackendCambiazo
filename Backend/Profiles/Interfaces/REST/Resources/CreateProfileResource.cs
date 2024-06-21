@@ -1,6 +1,3 @@
 namespace Backend.Profiles.Interfaces.REST.Resources;
 
-public class CreateProfileResource
-{
-    
-}
+public record CreateProfileResource(string FirstName, string LastName, string Email, int Phone, string Photo);
