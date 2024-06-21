@@ -1,5 +1,7 @@
 using Backend.Donation.Domain.Model.Aggregates;
 using Backend.Donation.Domain.Model.Enitities;
+using Backend.IAM.Domain.Model.Aggregates;
+using Backend.Profiles.Domain.Model.Aggregates;
 using Backend.Shared.Infrastructure.Persistence.EFC.Configuration.Extensions;
 using EntityFrameworkCore.CreatedUpdatedDate.Extensions;
 using Microsoft.EntityFrameworkCore;
@@ -93,7 +95,39 @@ public class AppDbContext(DbContextOptions options) : DbContext(options)
             .HasPrincipalKey(t => t.Id);
         
         
+        // Profiles
+        builder.Entity<Profile>().HasKey(p => p.Id);
+        builder.Entity<Profile>().Property(p => p.Id).IsRequired().ValueGeneratedOnAdd();
+        builder.Entity<Profile>().OwnsOne(p => p.Name, n =>
+        {
+            n.WithOwner().HasForeignKey("Id");
+            n.Property(p => p.FirstName).HasColumnName("FirstName");
+            n.Property(p => p.LastName).HasColumnName("LastName");
+        });
+
+        builder.Entity<Profile>().OwnsOne(p => p.Email, e =>
+        {
+            e.WithOwner().HasForeignKey("Id");
+            e.Property(a => a.Address).HasColumnName("EmailAddress");
+        });
+
+        builder.Entity<Profile>().OwnsOne(p => p.Phone, e =>
+        {
+            e.WithOwner().HasForeignKey("Id");
+            e.Property(a => a.Phone).HasColumnName("PhoneNumber");
+        });
+
+        builder.Entity<Profile>().OwnsOne(p => p.Photo, e =>
+        {
+            e.WithOwner().HasForeignKey("Id");
+            e.Property(a => a.Photo).HasColumnName("ProfilePhoto");
+        });
         
+        // IAM
+        builder.Entity<User>().HasKey(u => u.Id);
+        builder.Entity<User>().Property(u => u.Id).IsRequired().ValueGeneratedOnAdd();
+        builder.Entity<User>().Property(u => u.Email).IsRequired();
+        builder.Entity<User>().Property(u => u.PasswordHash).IsRequired();
 
         
        
