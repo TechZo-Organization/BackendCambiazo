@@ -1,6 +1,3 @@
 namespace Backend.IAM.Domain.Model.Queries;
 
-public class GetUserByIdQuery
-{
-    
-}
+public record GetUserByIdQuery(int Id);

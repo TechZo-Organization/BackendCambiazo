@@ -1,6 +1,3 @@
 namespace Backend.IAM.Domain.Model.Queries;
 
-public class GetUserByEmailQuery
-{
-    
-}
+public record GetUserByEmailQuery(string Email);
