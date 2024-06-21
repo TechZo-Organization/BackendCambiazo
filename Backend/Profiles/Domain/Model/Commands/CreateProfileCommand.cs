@@ -1,6 +1,3 @@
 namespace Backend.Profiles.Domain.Model.Commands;
 
-public class CreateProfileCommand
-{
-    
-}
+public record CreateProfileCommand(string FirstName, string LastName, string Email, int Phone, string Photo);
