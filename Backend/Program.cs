@@ -5,6 +5,11 @@ using Backend.Donation.Application.Internal.QueryServices;
 using Backend.Donation.Domain.Repositories;
 using Backend.Donation.Domain.Services;
 using Backend.Donation.Infraestructure.Persistence.EFC.Repositories;
+using Backend.Exchange.Application.Internal.CommandServices;
+using Backend.Exchange.Application.Internal.QueryServices;
+using Backend.Exchange.Domain.Repositories;
+using Backend.Exchange.Domain.Services;
+using Backend.Exchange.Infraestructure.Persistence.EFC.Repositories;
 using Backend.IAM.Application.Internal.CommandServices;
 using Backend.IAM.Application.Internal.OutboundServices;
 using Backend.IAM.Application.Internal.QueryServices;
@@ -152,6 +157,28 @@ builder.Services.AddScoped<IAccountNumberCommandService, AccountNumberCommandSer
 
 builder.Services.AddScoped<ISocialNetworkRepository, SocialNetworkRepository>();
 builder.Services.AddScoped<ISocialNetworkCommandService, SocialNetworkCommandService>();
+
+builder.Services.AddScoped<IProductRepository, ProductRepository>();
+builder.Services.AddScoped<IProductCommandService, ProductCommandService>();
+builder.Services.AddScoped<IProductQueryService, ProductQueryService>();
+
+builder.Services.AddScoped<IProductCategoryRepository, ProductCategoryRepository>();
+builder.Services.AddScoped<IProductCategoryCommandService, ProductCategoryCommandService>();
+builder.Services.AddScoped<IProductCategoryQueryService, ProductCategoryQueryService>();
+
+builder.Services.AddScoped<ICountryRepository, CountryRepository>();
+builder.Services.AddScoped<ICountryCommandService, CountryCommandService>();
+
+builder.Services.AddScoped<IDepartmentRepository, DepartmentRepository>();
+builder.Services.AddScoped<IDepartmentCommandService, DepartmentCommandService>();
+
+builder.Services.AddScoped<IDistrictRepository, DistrictRepository>();
+builder.Services.AddScoped<IDistrictCommandService, DistrictCommandService>();
+builder.Services.AddScoped<IDistrictQueryService, DistrictQueryService>();
+
+
+
+
 
 
 
