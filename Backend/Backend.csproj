@@ -30,7 +30,6 @@
       <Folder Include="Donation\Domain\Model\ValueObjects\" />
       <Folder Include="Exchange\Domain\Model\Commnads\ProductCommands\" />
       <Folder Include="Exchange\Domain\Model\ValueObjects\" />
-      <Folder Include="IAM\Application\Internal\QueryServices\" />
     </ItemGroup>
 
 </Project>
