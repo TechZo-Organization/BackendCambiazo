@@ -1,6 +1,7 @@
 namespace Backend.IAM.Infrastructure.Pipeline.Middleware.Attributes;
 
-public class AllowAnonymousAttribute
+[AttributeUsage(AttributeTargets.Method)]
+public class AllowAnonymousAttribute : Attribute
 {
     
 }
