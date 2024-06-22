@@ -1,3 +1,5 @@
+using System.Text.Json.Serialization;
+using Backend.Exchange.Domain.Model.Aggregates;
 using Backend.Profiles.Domain.Model.Commands;
 using Backend.Profiles.Domain.Model.ValueObjects;
 
@@ -34,6 +36,11 @@ public partial class Profile
     public EmailAddress Email { get; private set; }
     public PhoneNumber Phone { get; private set; }
     public ProfilePhoto Photo { get; private set; }
+    
+    [JsonIgnore]
+    public ICollection<Product> Products { get; set; }
+    [JsonIgnore]
+    public ICollection<FavoriteProduct> FavoriteProducts { get; set; }
 
     public string FullName => Name.FullName;
     
