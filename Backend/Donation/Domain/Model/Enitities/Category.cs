@@ -1,3 +1,4 @@
+using System.Text.Json.Serialization;
 using Backend.Donation.Domain.Model.Commnads.Category;
 using Microsoft.EntityFrameworkCore;
 using Mysqlx.Crud;
@@ -10,7 +11,7 @@ public class Category
 {
     public int Id { get; set; }
     public string Name { get; set; }
-    
+    [JsonIgnore]
     public ICollection<Ong> Ongs { get; internal set; }
     
     public Category()
