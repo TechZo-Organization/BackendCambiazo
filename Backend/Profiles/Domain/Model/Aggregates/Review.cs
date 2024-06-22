@@ -8,7 +8,6 @@ public partial class Review
     public int Id { get; set; }
     public string Message { get; set; }
     public string State { get; set; }
-    
     public int ProfileAuthorId { get; set; }
     public int ProfileReceptorId { get; set; }
     public int OfferId { get; set; }
