@@ -9,11 +9,11 @@ public class Department
     public int Id { get; set; }
     public string Name { get; set; }
     
-    public int CountryId { get; set; }
+    public int CountryId { internal get; set; }
     public Country Country { get; set; }
     
     [JsonIgnore]
-    public ICollection<District> Districts { get; set; }
+    public ICollection<District> Districts { get; internal set; }
     
     public Department()
     {

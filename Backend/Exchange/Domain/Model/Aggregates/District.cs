@@ -9,10 +9,10 @@ public class District
     public string Name { get; set; }
     public int DepartmentId { get; set; }
     
-    public Department Department { get; set; }
+    public Department Department { get; internal set; }
     
     [JsonIgnore]
-    public ICollection<Product> Products { get; set; }
+    public ICollection<Product> Products { get; internal set; }
 
     
     public District()
