@@ -1,5 +1,8 @@
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Text.Json.Serialization;
 using Backend.Exchange.Domain.Model.Commnads.OfferCommands;
+using Backend.Profiles.Domain.Model.Aggregates;
+
 namespace Backend.Exchange.Domain.Model.Aggregates;
 
 public partial class Offer
@@ -11,6 +14,9 @@ public partial class Offer
 
     public Product ProductOwner { get; set; }
     public Product ProductExchange { get; set; }
+    
+    [JsonIgnore]
+    public ICollection<Review> Reviews { get;internal set; }
 
     public Offer()
     {
