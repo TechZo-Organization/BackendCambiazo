@@ -10,7 +10,7 @@ public class Country
     public string Name { get; set; }
     
     [JsonIgnore]
-    public ICollection<Department> Departments { get; set; }
+    public ICollection<Department> Departments { get; internal set; }
     public Country(string name)
     {
         Name = name;

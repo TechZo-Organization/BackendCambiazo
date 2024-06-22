@@ -4,6 +4,7 @@ using Backend.Exchange.Domain.Model.Aggregates;
 using Backend.Exchange.Domain.Model.Enitities;
 using Backend.IAM.Domain.Model.Aggregates;
 using Backend.Profiles.Domain.Model.Aggregates;
+using Backend.Profiles.Domain.Model.Entities;
 using Backend.Shared.Infrastructure.Persistence.EFC.Configuration.Extensions;
 using EntityFrameworkCore.CreatedUpdatedDate.Extensions;
 using Microsoft.EntityFrameworkCore;
@@ -239,6 +240,31 @@ public class AppDbContext(DbContextOptions options) : DbContext(options)
             .WithMany(e=>e.FavoriteProducts)
             .HasForeignKey(e => e.ProductId)
             .HasPrincipalKey(t => t.Id);
+        
+        //membership
+        builder.Entity<Membership>().ToTable("Memberships");
+        builder.Entity<Membership>().HasKey(e => e.Id);
+        builder.Entity<Membership>().Property(e => e.Id).ValueGeneratedOnAdd();
+        builder.Entity<Membership>().Property(e => e.Name).IsRequired();
+        builder.Entity<Membership>().Property(e => e.Description).IsRequired();
+        builder.Entity<Membership>().Property(e => e.Price).IsRequired();
+        
+        //relationship membership and benfit
+        builder.Entity<Membership>()
+            .HasMany(e => e.Benefits)
+            .WithOne(e=>e.Membership)
+            .HasForeignKey(e => e.MembershipId)
+            .HasPrincipalKey(t => t.Id);
+        
+        //relation membership and user
+        builder.Entity<Membership>()
+            .HasMany(e => e.Users)
+            .WithOne(e=>e.Membership)
+            .HasForeignKey(e => e.MembershipId)
+            .HasPrincipalKey(t => t.Id);
+        
+        
+        
         
         
         // Apply SnakeCase Naming Convention
