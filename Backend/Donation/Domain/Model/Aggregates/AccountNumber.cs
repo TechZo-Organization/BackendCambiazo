@@ -10,6 +10,9 @@ public class AccountNumber
     public string Number { get; set; }
     public int OngId { get; set; }
     
+    public Ong Ong { get; set; }
+
+    
     public AccountNumber(string name, string cci, string number, int ongId)
     {
         Name = name;
