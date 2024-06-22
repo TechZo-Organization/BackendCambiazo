@@ -10,6 +10,9 @@ public class SocialNetwork
     public string Icon { get; set; }
     public int OngId { get; set; }
     
+    public Ong Ong { get; set; }
+
+    
     public SocialNetwork(string name, string url, string icon, int ongId)
     {
         Name = name;
