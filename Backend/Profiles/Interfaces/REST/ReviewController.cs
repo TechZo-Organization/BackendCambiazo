@@ -1,3 +1,4 @@
+using Backend.IAM.Infrastructure.Pipeline.Middleware.Attributes;
 using Backend.Profiles.Domain.Model.Commands.ReviewCommands;
 using Backend.Profiles.Domain.Model.Queries.ReviewQueries;
 using Backend.Profiles.Domain.Services;
@@ -13,6 +14,7 @@ public class ReviewController(IReviewCommandService reviewCommandService,IReview
 {
     
     [HttpPost]
+    [AllowAnonymous]
     public async Task<IActionResult> CreateReview(CreateReviewResource resource)
     {
         var createReviewCommand = CreateReviewCommandFromResourceAssembler.ToCommandFromResource(resource);
@@ -23,6 +25,7 @@ public class ReviewController(IReviewCommandService reviewCommandService,IReview
     }
     
     [HttpDelete("{reviewId:int}")]
+    [AllowAnonymous]
     public async Task<IActionResult> DeleteReview(int reviewId)
     {
         var deleteReviewCommand = new DeleteReviewCommand(reviewId);
@@ -33,6 +36,7 @@ public class ReviewController(IReviewCommandService reviewCommandService,IReview
     }
     
     [HttpGet]
+    [AllowAnonymous]
     public async Task<IActionResult> GetAllReviews()
     {
         var getAllReviewsQuery = new GetAllReviewsQuery();
@@ -42,6 +46,7 @@ public class ReviewController(IReviewCommandService reviewCommandService,IReview
     }
     
     [HttpGet("{reviewId:int}")]
+    [AllowAnonymous]
     public async Task<IActionResult> GetReviewById(int reviewId)
     {
         var getReviewByIdQuery = new GetReviewByIdQuery(reviewId);
