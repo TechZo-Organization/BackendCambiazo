@@ -11,6 +11,8 @@ public class Project
     public string Description { get; set; }
     public int OngId { get; set; }
     
+    public Ong Ong { get; set; }
+    
     public Project(string name, string description, int ongId)
     {
         Name = name;
