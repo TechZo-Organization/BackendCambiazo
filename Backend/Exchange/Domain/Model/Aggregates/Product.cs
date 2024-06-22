@@ -1,6 +1,8 @@
+using System.Collections;
+using System.Text.Json.Serialization;
 using Backend.Exchange.Domain.Model.Commnads.ProductCommands;
 using Backend.Exchange.Domain.Model.Enitities;
-using Mysqlx.Crud;
+using Backend.Profiles.Domain.Model.Aggregates;
 
 namespace Backend.Exchange.Domain.Model.Aggregates;
 
@@ -18,8 +20,15 @@ public class Product
     public int UserId { get; set; }
     public int DistrictId { get; set; }
     
+    public Profile User { get; set; }
     public ProductCategory Category { get; set; }
     public District District { get; set; }
+    [JsonIgnore]
+    public ICollection<Offer> OffersAsOwner { get; set; }
+    [JsonIgnore]
+    public ICollection<Offer> OffersAsExchange { get; set; }
+    [JsonIgnore]
+    public ICollection<FavoriteProduct> FavoriteProducts { get; set; }
     
     public Product(string name, string description, string objectChange, float price, string photo, bool boost, bool available, int categoryId,int userId, int districtId)
     {

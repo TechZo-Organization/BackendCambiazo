@@ -1,3 +1,4 @@
+using System.Text.Json.Serialization;
 using Backend.Exchange.Domain.Model.Commnads.DistrictCommands;
 
 namespace Backend.Exchange.Domain.Model.Aggregates;
@@ -9,6 +10,10 @@ public class District
     public int DepartmentId { get; set; }
     
     public Department Department { get; set; }
+    
+    [JsonIgnore]
+    public ICollection<Product> Products { get; set; }
+
     
     public District()
     {
