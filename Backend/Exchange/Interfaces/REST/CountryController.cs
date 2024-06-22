@@ -2,6 +2,7 @@ using Backend.Exchange.Domain.Model.Commnads.CountryCommands;
 using Backend.Exchange.Domain.Services;
 using Backend.Exchange.Interfaces.REST.Resources;
 using Backend.Exchange.Interfaces.REST.Transform;
+using Backend.IAM.Infrastructure.Pipeline.Middleware.Attributes;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Backend.Exchange.Interfaces.REST;
@@ -12,6 +13,7 @@ public class CountryController(ICountryCommandService countryCommandService): Co
 {
     
     [HttpPost]
+    [AllowAnonymous]
     public async Task<IActionResult> CreateCountry(CreateCountryResource resource)
     {
         var createCountryCommand = CreateCountryCommandFromResourceAssembler.ToCommandFromResource(resource);
@@ -24,6 +26,7 @@ public class CountryController(ICountryCommandService countryCommandService): Co
     
     //put
     [HttpPut("{countryId:int}")]
+    [AllowAnonymous]
     public async Task<IActionResult> UpdateCountry(int countryId, CreateCountryResource resource)
     {
         var updateCountryCommand = new UpdateCountryCommand(countryId, resource.Name);
@@ -35,6 +38,7 @@ public class CountryController(ICountryCommandService countryCommandService): Co
     
     //delete
     [HttpDelete("{countryId:int}")]
+    [AllowAnonymous]
     public async Task<IActionResult> DeleteCountry(int countryId)
     {
         var deleteCountryCommand = new DeleteCountryCommand(countryId);

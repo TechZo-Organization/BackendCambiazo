@@ -4,8 +4,8 @@ using Backend.Donation.Domain.Services;
 using Backend.Donation.Interfaces.REST.Resources;
 using Backend.Donation.Interfaces.REST.Transform;
 using Microsoft.AspNetCore.Mvc;
-using Backend.Donation.Domain.Model.Commnads;
-using Backend.Donation.Domain.Model.Queries;
+using Backend.IAM.Infrastructure.Pipeline.Middleware.Attributes;
+
 
 namespace Backend.Donation.Interfaces.REST;
 
@@ -15,6 +15,7 @@ public class CategoryController(ICategoryCommandService categoryCommandService,I
 {
    
     [HttpPost]
+    [AllowAnonymous]
     public async Task<IActionResult> CreateCategory(CreateCategoryResource resource)
     {
         var createCategoryCommand = CreateCategoryFromResourceAssembler.ToCommandFromResource(resource);
@@ -26,6 +27,7 @@ public class CategoryController(ICategoryCommandService categoryCommandService,I
     
     
     [HttpGet]
+    [AllowAnonymous]
     public async Task<IActionResult> GetAllCategories()
     {
         var getAllCategoriesQuery = new GetAllCategoriesQuery();
@@ -35,6 +37,7 @@ public class CategoryController(ICategoryCommandService categoryCommandService,I
     }
     
     [HttpGet("{categoryId:int}")]
+    [AllowAnonymous]
     public async Task<IActionResult> GetCategoryById(int categoryId)
     {
         var getCategoryByIdQuery = new GetCategoryByIdQuery(categoryId);
@@ -45,6 +48,7 @@ public class CategoryController(ICategoryCommandService categoryCommandService,I
     }
     
     [HttpDelete("{categoryId:int}")]
+    [AllowAnonymous]
     public async Task<IActionResult> DeleteCategory(int categoryId)
     {
         var deleteCategoryCommand = new DeleteCategoryCommand(categoryId);
@@ -55,6 +59,7 @@ public class CategoryController(ICategoryCommandService categoryCommandService,I
     }
     
     [HttpPut("{categoryId:int}")]
+    [AllowAnonymous]
     public async Task<IActionResult> UpdateCategory(int categoryId, CreateCategoryResource resource)
     {
         var updateCategoryCommand = new UpdateCategoryCommand(categoryId, resource.Name);

@@ -2,6 +2,7 @@ using Backend.Donation.Domain.Model.Commnads.AccountNumber;
 using Backend.Donation.Domain.Services;
 using Backend.Donation.Interfaces.REST.Resources.AccountNumber;
 using Backend.Donation.Interfaces.REST.Transform;
+using Backend.IAM.Infrastructure.Pipeline.Middleware.Attributes;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Backend.Donation.Interfaces.REST;
@@ -11,6 +12,7 @@ namespace Backend.Donation.Interfaces.REST;
 public class AccountNumberController(IAccountNumberCommandService accountNumberCommandService) : ControllerBase
 {
     [HttpPost]
+    [AllowAnonymous]
     public async Task<IActionResult> CreateAccountNumber(CreateAccountNumberResource resource)
     {
         var createAccountNumberCommand = CreateAccountNumberCommandFromResourceAssembler.ToCommandFromResource(resource);
@@ -22,6 +24,7 @@ public class AccountNumberController(IAccountNumberCommandService accountNumberC
     }
     
     [HttpPut]
+    [AllowAnonymous]
     public async Task<IActionResult> UpdateAccountNumber(int accountNumberId, CreateAccountNumberResource resource)
     {
         var updateAccountNumberCommand = new UpdateAccountNumberCommand(accountNumberId, resource.Name, resource.CCI, resource.Number, resource.OngId);
@@ -32,6 +35,7 @@ public class AccountNumberController(IAccountNumberCommandService accountNumberC
     }
     
     [HttpDelete("{accountNumberId:int}")]
+    [AllowAnonymous]
     public async Task<IActionResult> DeleteAccountNumber(int accountNumberId)
     {
         var deleteAccountNumberCommand = new DeleteAccountNumberCommand(accountNumberId);
