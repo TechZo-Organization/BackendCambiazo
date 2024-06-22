@@ -1,3 +1,3 @@
 namespace Backend.Exchange.Domain.Model.Commnads.OfferCommands;
 
-public record DeleteCommandOffer();
+public record DeleteOfferCommand(int Id);
