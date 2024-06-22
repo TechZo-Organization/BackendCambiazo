@@ -107,7 +107,6 @@ public class AppDbContext(DbContextOptions options) : DbContext(options)
         builder.Entity<Product>().Property(e => e.Photo).IsRequired();
         builder.Entity<Product>().Property(e => e.Boost).IsRequired();
         builder.Entity<Product>().Property(e => e.Available).IsRequired();
-        builder.Entity<Product>().Property(e => e.UserId).IsRequired();
         
         //product category
         builder.Entity<ProductCategory>().ToTable("ProductCategories");
@@ -118,7 +117,7 @@ public class AppDbContext(DbContextOptions options) : DbContext(options)
         //relationship product and product category
         builder.Entity<Product>()
             .HasOne(e => e.Category)
-            .WithMany()
+            .WithMany(c=>c.Products)
             .HasForeignKey(e => e.CategoryId)
             .HasPrincipalKey(t => t.Id);
       
@@ -150,6 +149,20 @@ public class AppDbContext(DbContextOptions options) : DbContext(options)
             e.Property(a => a.Photo).HasColumnName("ProfilePhoto");
         });
         
+        //profile and produtcs
+        builder.Entity<Product>()
+            .HasOne(e => e.User)
+            .WithMany(e=>e.Products)
+            .HasForeignKey(e => e.UserId)
+            .HasPrincipalKey(t => t.Id);
+        
+        //profile and favorite products
+        builder.Entity<FavoriteProduct>()
+            .HasOne(e => e.User)
+            .WithMany(e=>e.FavoriteProducts)
+            .HasForeignKey(e => e.UserId)
+            .HasPrincipalKey(t => t.Id);
+        
         // IAM
         builder.Entity<User>().HasKey(u => u.Id);
         builder.Entity<User>().Property(u => u.Id).IsRequired().ValueGeneratedOnAdd();
@@ -178,24 +191,54 @@ public class AppDbContext(DbContextOptions options) : DbContext(options)
         //product and district
         builder.Entity<Product>()
             .HasOne(e => e.District)
-            .WithMany()
+            .WithMany(e=>e.Products)
             .HasForeignKey(e => e.DistrictId)
             .HasPrincipalKey(t => t.Id);
         
         //relationship department and district
         builder.Entity<District>()
             .HasOne(e => e.Department)
-            .WithMany()
+            .WithMany(e=>e.Districts)
             .HasForeignKey(e => e.DepartmentId)
             .HasPrincipalKey(t => t.Id);
         
         //relationship department and country
         builder.Entity<Department>()
             .HasOne(e => e.Country)
-            .WithMany()
+            .WithMany(e=>e.Departments)
             .HasForeignKey(e => e.CountryId)
             .HasPrincipalKey(t => t.Id);
         
+        //offer
+        builder.Entity<Offer>().ToTable("Offers");
+        builder.Entity<Offer>().HasKey(e => e.Id);
+        builder.Entity<Offer>().Property(e => e.Id).ValueGeneratedOnAdd();
+        builder.Entity<Offer>().Property(e => e.State).IsRequired();
+        
+        //many to many in offer
+        builder.Entity<Offer>()
+            .HasOne(e => e.ProductOwner)
+            .WithMany(p=>p.OffersAsOwner)
+            .HasForeignKey(e => e.ProductOwnerId)
+            .HasPrincipalKey(t => t.Id);
+        
+        builder.Entity<Offer>()
+            .HasOne(e => e.ProductExchange)
+            .WithMany(p=>p.OffersAsExchange)
+            .HasForeignKey(e => e.ProductExchangeId)
+            .HasPrincipalKey(t => t.Id);
+        
+        //favorite product
+        builder.Entity<FavoriteProduct>().ToTable("FavoriteProducts");
+        builder.Entity<FavoriteProduct>().HasKey(e => e.Id);
+        builder.Entity<FavoriteProduct>().Property(e => e.Id).ValueGeneratedOnAdd();
+        
+        //relationship favorite product and product
+        builder.Entity<FavoriteProduct>()
+            .HasOne(e => e.Product)
+            .WithMany(e=>e.FavoriteProducts)
+            .HasForeignKey(e => e.ProductId)
+            .HasPrincipalKey(t => t.Id);
         
         
         // Apply SnakeCase Naming Convention
