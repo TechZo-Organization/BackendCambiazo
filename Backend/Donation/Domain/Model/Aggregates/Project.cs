@@ -9,9 +9,9 @@ public class Project
     public int Id { get; set; }
     public string Name { get; set; }
     public string Description { get; set; }
-    public int OngId { get; set; }
+    public int OngId {get; set; }
     
-    public Ong Ong { get; set; }
+    public Ong Ong {internal get; set; }
     
     public Project(string name, string description, int ongId)
     {
