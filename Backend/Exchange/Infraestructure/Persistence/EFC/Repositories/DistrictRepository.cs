@@ -10,7 +10,7 @@ public class DistrictRepository(AppDbContext context) : BaseRepository<District>
 {
     public override async Task<IEnumerable<District>> ListAsync()
     {
-        return await context.Set<District>()
+        return await Context.Set<District>()
             .Include(d=>d.Department)
             .Include(d=>d.Department.Country)
             .ToListAsync();
@@ -18,7 +18,7 @@ public class DistrictRepository(AppDbContext context) : BaseRepository<District>
     
     public override async Task<District?> FindByIdAsync(int id)
     {
-        return await context.Set<District>()
+        return await Context.Set<District>()
             .Include(d=>d.Department)
             .Include(d=>d.Department.Country)
             .FirstOrDefaultAsync(d=>d.Id == id);
@@ -26,7 +26,7 @@ public class DistrictRepository(AppDbContext context) : BaseRepository<District>
     
     public async Task<District?> GetByNameAsync(string name)
     {
-        return await context.Set<District>()
+        return await Context.Set<District>()
             .FirstOrDefaultAsync(d => d.Name == name);
     }
 }
