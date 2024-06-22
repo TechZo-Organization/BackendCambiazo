@@ -8,7 +8,7 @@ public class SocialNetwork
     public string Name { get; set; }
     public string Url { get; set; }
     public string Icon { get; set; }
-    public int OngId { get; set; }
+    public int OngId { internal get; set; }
     
     public Ong Ong { internal get; set; }
 
