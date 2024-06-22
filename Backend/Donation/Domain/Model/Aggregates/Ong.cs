@@ -1,3 +1,4 @@
+using System.Text.Json.Serialization;
 using Backend.Donation.Domain.Model.Commnads.Ong;
 using Backend.Donation.Domain.Model.Enitities;
 using Backend.Donation.Domain.Model.Commnads;
@@ -22,9 +23,11 @@ public class Ong
     public string AttentionSchedule { get; set; }
 
     public int CategoryId {get;set;}
-    
+    [JsonIgnore]
     public ICollection<Project> Projects { get; internal set; }
+    [JsonIgnore]
     public ICollection<SocialNetwork> SocialNetworks { get;internal set; }
+    [JsonIgnore]
     public ICollection<AccountNumber> AccountNumbers { get;internal set; }
 
     public Category Category {get;internal set;}
