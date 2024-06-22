@@ -10,7 +10,7 @@ public class CountryRepository(AppDbContext context) : BaseRepository<Country>(c
 {
     public async Task<Country?> GetByNameAsync(string name)
     {
-        return await context.Set<Country>()
+        return await Context.Set<Country>()
             .FirstOrDefaultAsync(c => c.Name == name);
     }
 }

@@ -3,6 +3,7 @@ using Backend.Exchange.Domain.Model.Queries.DistrictQueries;
 using Backend.Exchange.Domain.Services;
 using Backend.Exchange.Interfaces.REST.Resources;
 using Backend.Exchange.Interfaces.REST.Transform;
+using Backend.IAM.Infrastructure.Pipeline.Middleware.Attributes;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Backend.Exchange.Interfaces.REST;
@@ -13,6 +14,7 @@ public class DistrictController(IDistrictCommandService commandService,IDistrict
 {
     //post
     [HttpPost]
+    [AllowAnonymous]
     public async Task<IActionResult> CreateDistrict(CreateDistrictResource resource)
     {
         var createDistrictCommand = CreateDistrictCommandFromResourceAssembler.ToCommandFromResource(resource);
@@ -24,6 +26,7 @@ public class DistrictController(IDistrictCommandService commandService,IDistrict
     
     //put
     [HttpPut("{districtId:int}")]
+    [AllowAnonymous]
     public async Task<IActionResult> UpdateDistrict(int districtId, CreateDistrictResource resource)
     {
         var updateDistrictCommand = new UpdateDistrictCommand(districtId, resource.Name, resource.DepartmentId);
@@ -35,6 +38,7 @@ public class DistrictController(IDistrictCommandService commandService,IDistrict
     
     //delete
     [HttpDelete("{districtId:int}")]
+    [AllowAnonymous]
     public async Task<IActionResult> DeleteDistrict(int districtId)
     {
         var deleteDistrictCommand = new DeleteDistrictCommand(districtId);
@@ -45,6 +49,7 @@ public class DistrictController(IDistrictCommandService commandService,IDistrict
     }
     
     [HttpGet("{districtId:int}")]
+    [AllowAnonymous]
     public async Task<IActionResult> GetDistrictById(int districtId)
     {
         var getDistrictByIdQuery = new GetDistrictByIdQuery(districtId);
@@ -55,6 +60,7 @@ public class DistrictController(IDistrictCommandService commandService,IDistrict
     }
     
     [HttpGet]
+    [AllowAnonymous]
     public async Task<IActionResult> GetAllDistricts()
     {
         var getAllDistrictsQuery = new GetAllDistrictsQuery();

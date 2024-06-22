@@ -1,3 +1,4 @@
+using System.Text.Json.Serialization;
 using Backend.Exchange.Domain.Model.Commnads.DepartmentCommands;
 using Backend.Exchange.Domain.Model.Enitities;
 
@@ -10,6 +11,9 @@ public class Department
     
     public int CountryId { get; set; }
     public Country Country { get; set; }
+    
+    [JsonIgnore]
+    public ICollection<District> Districts { get; set; }
     
     public Department()
     {

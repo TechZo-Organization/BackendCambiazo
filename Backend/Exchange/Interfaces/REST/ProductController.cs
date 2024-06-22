@@ -1,10 +1,10 @@
-using Backend.Exchange.Application.Internal.CommandServices;
-using Backend.Exchange.Application.Internal.QueryServices;
+
 using Backend.Exchange.Domain.Model.Commnads.ProductCommands;
 using Backend.Exchange.Domain.Model.Queries.ProductQueries;
 using Backend.Exchange.Domain.Services;
 using Backend.Exchange.Interfaces.REST.Resources;
 using Backend.Exchange.Interfaces.REST.Transform;
+using Backend.IAM.Infrastructure.Pipeline.Middleware.Attributes;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Backend.Exchange.Interfaces.REST;
@@ -15,6 +15,7 @@ public class ProductController(IProductQueryService productQueryService,IProduct
 {
     
     [HttpGet]
+    [AllowAnonymous]
     public async Task<IActionResult> GetAllProducts()
     {
         var getAllProductsQuery = new GetAllProductsQuery();
@@ -24,6 +25,7 @@ public class ProductController(IProductQueryService productQueryService,IProduct
     }
     
     [HttpGet("{productId:int}")]
+    [AllowAnonymous]
     public async Task<IActionResult> GetProductById(int productId)
     {
         var getProductByIdQuery = new GetProductByIdQuery(productId);
@@ -34,6 +36,7 @@ public class ProductController(IProductQueryService productQueryService,IProduct
     }
     
    [HttpGet("boost/{boost:bool}")]
+   [AllowAnonymous]
    public async Task<IActionResult> GetAllAvailableProductsByBoost(bool boost)
    {
          var getAllAvailableProductsByBoostQuery = new GetAllAvailableProductsByBoostQuery(boost);
@@ -45,6 +48,7 @@ public class ProductController(IProductQueryService productQueryService,IProduct
    
    //get by category:
     [HttpGet("category/{categoryId:int}")]
+    [AllowAnonymous]
     public async Task<IActionResult> GetAllAvailableProductsByCategory(int categoryId)
     {
         var getAllAvailableProductsByCategoryQuery = new GetAllAvailableProductsByCategoryIdQuery(categoryId);
@@ -55,6 +59,7 @@ public class ProductController(IProductQueryService productQueryService,IProduct
     
     //get by word name:
     [HttpGet("name/{name}")]
+    [AllowAnonymous]
     public async Task<IActionResult> GetAllAvailableProductsByName(string name)
     {
         var getAllAvailableProductsByNameQuery = new GetAllAvailableProductsByWordNameQuery(name);
@@ -65,6 +70,7 @@ public class ProductController(IProductQueryService productQueryService,IProduct
     
     //by user adn aviable, 2 parameters:
     [HttpGet("user/{userId:int}/available/{available:bool}")]
+    [AllowAnonymous]
     public async Task<IActionResult> GetAllAvailableProductsByUserAndAvailable(int userId, bool available)
     {
         var getAllAvailableProductsByUserAndAvailableQuery = new GetAllProductsByUserAndAvailableQuery(userId, available);
@@ -75,6 +81,7 @@ public class ProductController(IProductQueryService productQueryService,IProduct
     
     //by price, district, word name and category:
     [HttpGet("price/{minPrice:float}/{maxPrice:float}/district/{districtId:int}/name/{name}/category/{categoryId:int}")]
+    [AllowAnonymous]
     public async Task<IActionResult> GetAllAvailableProductsByBetweenPricesAndDistrictAndWordNameAndCategory(int minPrice, int maxPrice, int districtId, string name, int categoryId)
     {
         var getAllAvailableProductsByBetweenPricesAndDistrictAndWordNameAndCategoryQuery = 
@@ -87,6 +94,7 @@ public class ProductController(IProductQueryService productQueryService,IProduct
     
     
     [HttpPost]
+    [AllowAnonymous]
     public async Task<IActionResult> CreateProduct(CreateProductResource resource)
     {
         var createProductCommand = CreateProductCommandFromResourceAssembler.ToCommandFromResource(resource);
@@ -98,6 +106,7 @@ public class ProductController(IProductQueryService productQueryService,IProduct
     
     
     [HttpPut("{productId:int}")]
+    [AllowAnonymous]
     public async Task<IActionResult> UpdateProduct(int productId, CreateProductResource resource)
     {
         var updateProductCommand = new UpdateProductCommand(productId, resource.Name, resource.Description,
@@ -111,6 +120,7 @@ public class ProductController(IProductQueryService productQueryService,IProduct
     }
     
     [HttpDelete("{productId:int}")]
+    [AllowAnonymous]
     public async Task<IActionResult> DeleteProduct(int productId)
     {
         var deleteProductCommand = new DeleteProductCommand(productId);

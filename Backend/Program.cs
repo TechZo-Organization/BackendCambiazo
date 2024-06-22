@@ -176,9 +176,9 @@ builder.Services.AddScoped<IDistrictRepository, DistrictRepository>();
 builder.Services.AddScoped<IDistrictCommandService, DistrictCommandService>();
 builder.Services.AddScoped<IDistrictQueryService, DistrictQueryService>();
 
-
-
-
+builder.Services.AddScoped<IOfferRepository, OfferRepository>();
+builder.Services.AddScoped<IOfferCommandService, OfferCommandService>();
+builder.Services.AddScoped<IOfferQueryService, OfferQueryService>();
 
 
 

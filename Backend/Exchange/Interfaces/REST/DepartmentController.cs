@@ -2,6 +2,7 @@ using Backend.Exchange.Domain.Model.Commnads.DepartmentCommands;
 using Backend.Exchange.Domain.Services;
 using Backend.Exchange.Interfaces.REST.Resources;
 using Backend.Exchange.Interfaces.REST.Transform;
+using Backend.IAM.Infrastructure.Pipeline.Middleware.Attributes;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Backend.Exchange.Interfaces.REST;
@@ -12,6 +13,7 @@ public class DepartmentController(IDepartmentCommandService departmentCommandSer
 {
     
     [HttpPost]
+    [AllowAnonymous]
     public async Task<IActionResult> CreateDepartment(CreateDepartmentResource resource)
     {
         var createDepartmentCommand = CreateDepartmentCommandFromResourceAssembler.ToCommandFromResource(resource);
@@ -23,6 +25,7 @@ public class DepartmentController(IDepartmentCommandService departmentCommandSer
     }
     
     [HttpPut("{departmentId:int}")]
+    [AllowAnonymous]
     public async Task<IActionResult> UpdateDepartment(int departmentId, CreateDepartmentResource resource)
     {
         var updateDepartmentCommand = new UpdateDepartmentCommand(departmentId, resource.Name, resource.CountryId);
@@ -33,6 +36,7 @@ public class DepartmentController(IDepartmentCommandService departmentCommandSer
     }
     
     [HttpDelete("{departmentId:int}")]
+    [AllowAnonymous]
     public async Task<IActionResult> DeleteDepartment(int departmentId)
     {
         var deleteDepartmentCommand = new DeleteDepartmentCommand(departmentId);

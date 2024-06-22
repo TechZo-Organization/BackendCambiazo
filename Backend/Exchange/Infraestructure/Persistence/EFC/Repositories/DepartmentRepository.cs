@@ -10,7 +10,7 @@ public class DepartmentRepository(AppDbContext context) : BaseRepository<Departm
 {
     public override async Task<IEnumerable<Department>> ListAsync()
     {
-        return await context.Set<Department>()
+        return await Context.Set<Department>()
             .Include(d=>d.Country)
             .ToListAsync();
     }
@@ -18,14 +18,14 @@ public class DepartmentRepository(AppDbContext context) : BaseRepository<Departm
     //by id
     public override async Task<Department?> FindByIdAsync(int id)
     {
-        return await context.Set<Department>()
+        return await Context.Set<Department>()
             .Include(d=>d.Country)
             .FirstOrDefaultAsync(d=>d.Id == id);
     }
     
     public async Task<Department?> GetByNameAsync(string name)
     {
-        return await context.Set<Department>()
+        return await Context.Set<Department>()
             .FirstOrDefaultAsync(d => d.Name == name);
     }
 }

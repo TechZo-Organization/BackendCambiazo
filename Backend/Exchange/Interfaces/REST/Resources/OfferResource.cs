@@ -1,7 +1,7 @@
 
-namespace Backend.Exchange.Domain.Model.Commnads.OfferCommands;
+namespace Backend.Exchange.Interfaces.REST.Resources;
 
-public record UpdateOfferCommand(
+public record OfferResource(
         int Id,
         int ProductOwnerId,
         int ProductExchangeId,
