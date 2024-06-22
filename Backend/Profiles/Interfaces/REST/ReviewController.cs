@@ -51,6 +51,4 @@ public class ReviewController(IReviewCommandService reviewCommandService,IReview
         return Ok(reviewResource);
     }
     
-    
-    
 }

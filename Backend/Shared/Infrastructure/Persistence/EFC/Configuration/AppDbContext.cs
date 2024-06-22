@@ -263,7 +263,33 @@ public class AppDbContext(DbContextOptions options) : DbContext(options)
             .HasForeignKey(e => e.MembershipId)
             .HasPrincipalKey(t => t.Id);
         
+        //review
+        builder.Entity<Review>().ToTable("Reviews");
+        builder.Entity<Review>().HasKey(e => e.Id);
+        builder.Entity<Review>().Property(e => e.Id).ValueGeneratedOnAdd();
+        builder.Entity<Review>().Property(e => e.Message).IsRequired();
+        builder.Entity<Review>().Property(e => e.State).IsRequired();
         
+        //relationship review and profile
+        builder.Entity<Review>()
+            .HasOne(e => e.UserAuthor)
+            .WithMany(e=>e.ReviewsAuthor)
+            .HasForeignKey(e => e.ProfileAuthorId)
+            .HasPrincipalKey(t => t.Id);
+        
+        builder.Entity<Review>()
+            .HasOne(e => e.UserReceptor)
+            .WithMany(e=>e.ReviewsReceptor)
+            .HasForeignKey(e => e.ProfileReceptorId)
+            .HasPrincipalKey(t => t.Id);
+        
+        //relationship review and offer
+        builder.Entity<Review>()
+            .HasOne(e => e.Offer)
+            .WithMany(e=>e.Reviews)
+            .HasForeignKey(e => e.OfferId)
+            .HasPrincipalKey(t => t.Id);
+
         
         
         
