@@ -8,7 +8,7 @@ public class AccountNumber
     public string Name { get; set; }
     public string CCI { get; set; }
     public string Number { get; set; }
-    public int OngId { get; set; }
+    public int OngId {internal get; set; }
     
     public Ong Ong {internal get; set; }
 
