@@ -44,6 +44,10 @@ public partial class Profile
     public ICollection<FavoriteProduct> FavoriteProducts { get; internal set; }
     public int MembershipId { get; set; }
     public Membership Membership { internal get; set; }
+    [JsonIgnore]
+    public ICollection<Review> ReviewsAuthor { get; internal set; }
+    [JsonIgnore]
+    public ICollection<Review> ReviewsReceptor { get; internal set; }
 
     public string FullName => Name.FullName;
     
