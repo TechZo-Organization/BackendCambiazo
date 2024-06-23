@@ -1,25 +1,27 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\mathi\\UPC\\CICLO V\\Aplicaciones Web\\MI Projectos Backend\\BackendCambiazo\\Backend\\Backend.csproj": {}
+    "C:\\Users\\user\\Documents\\GitHub\\BackendCambiazo\\Backend\\Backend.csproj": {}
   },
   "projects": {
-    "C:\\Users\\mathi\\UPC\\CICLO V\\Aplicaciones Web\\MI Projectos Backend\\BackendCambiazo\\Backend\\Backend.csproj": {
+    "C:\\Users\\user\\Documents\\GitHub\\BackendCambiazo\\Backend\\Backend.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\mathi\\UPC\\CICLO V\\Aplicaciones Web\\MI Projectos Backend\\BackendCambiazo\\Backend\\Backend.csproj",
+        "projectUniqueName": "C:\\Users\\user\\Documents\\GitHub\\BackendCambiazo\\Backend\\Backend.csproj",
         "projectName": "Backend",
-        "projectPath": "C:\\Users\\mathi\\UPC\\CICLO V\\Aplicaciones Web\\MI Projectos Backend\\BackendCambiazo\\Backend\\Backend.csproj",
-        "packagesPath": "C:\\Users\\mathi\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\mathi\\UPC\\CICLO V\\Aplicaciones Web\\MI Projectos Backend\\BackendCambiazo\\Backend\\obj\\",
+        "projectPath": "C:\\Users\\user\\Documents\\GitHub\\BackendCambiazo\\Backend\\Backend.csproj",
+        "packagesPath": "C:\\Users\\user\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\user\\Documents\\GitHub\\BackendCambiazo\\Backend\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\mathi\\AppData\\Roaming\\NuGet\\NuGet.Config"
+          "C:\\Users\\user\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
           "net8.0"
         ],
         "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -114,7 +116,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Users\\mathi\\.dotnet\\sdk\\8.0.300/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Users\\user\\.dotnet\\sdk\\8.0.300/PortableRuntimeIdentifierGraph.json"
         }
       }
     }

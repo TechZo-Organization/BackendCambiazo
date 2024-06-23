@@ -1,5 +1,10 @@
 using Backend.Donation.Domain.Model.Aggregates;
 using Backend.Donation.Domain.Model.Enitities;
+using Backend.Exchange.Domain.Model.Aggregates;
+using Backend.Exchange.Domain.Model.Enitities;
+using Backend.IAM.Domain.Model.Aggregates;
+using Backend.Profiles.Domain.Model.Aggregates;
+using Backend.Profiles.Domain.Model.Entities;
 using Backend.Shared.Infrastructure.Persistence.EFC.Configuration.Extensions;
 using EntityFrameworkCore.CreatedUpdatedDate.Extensions;
 using Microsoft.EntityFrameworkCore;
@@ -46,7 +51,7 @@ public class AppDbContext(DbContextOptions options) : DbContext(options)
         
         builder.Entity<Ong>()
             .HasOne(e => e.Category)
-            .WithMany()
+            .WithMany(e=>e.Ongs)
             .HasForeignKey(e => e.CategoryId)
             .HasPrincipalKey(t => t.Id);
         
@@ -76,27 +81,218 @@ public class AppDbContext(DbContextOptions options) : DbContext(options)
         //relationship ong and all, if my ong have a listt or icollection of projects, socialnetworks, accountnumbers
         builder.Entity<Ong>()
             .HasMany(e => e.Projects)
-            .WithOne()
+            .WithOne(e=>e.Ong)
             .HasForeignKey(e => e.OngId)
             .HasPrincipalKey(t => t.Id);
         
         builder.Entity<Ong>()
             .HasMany(e => e.SocialNetworks)
-            .WithOne()
+            .WithOne(e=>e.Ong)
             .HasForeignKey(e => e.OngId)
             .HasPrincipalKey(t => t.Id);
         
         builder.Entity<Ong>()
             .HasMany(e => e.AccountNumbers)
-            .WithOne()
+            .WithOne(e=>e.Ong)
             .HasForeignKey(e => e.OngId)
             .HasPrincipalKey(t => t.Id);
         
+        //product
+        builder.Entity<Product>().ToTable("Products");
+        builder.Entity<Product>().HasKey(e => e.Id);
+        builder.Entity<Product>().Property(e => e.Id).ValueGeneratedOnAdd();
+        builder.Entity<Product>().Property(e => e.Name).IsRequired();
+        builder.Entity<Product>().Property(e => e.Description).IsRequired();
+        builder.Entity<Product>().Property(e => e.ObjectChange).IsRequired();
+        builder.Entity<Product>().Property(e => e.Price).IsRequired();
+        builder.Entity<Product>().Property(e => e.Photo).IsRequired();
+        builder.Entity<Product>().Property(e => e.Boost).IsRequired();
+        builder.Entity<Product>().Property(e => e.Available).IsRequired();
         
+        //product category
+        builder.Entity<ProductCategory>().ToTable("ProductCategories");
+        builder.Entity<ProductCategory>().HasKey(e => e.Id);
+        builder.Entity<ProductCategory>().Property(e => e.Id).ValueGeneratedOnAdd();
+        builder.Entity<ProductCategory>().Property(e => e.Name).IsRequired();
+            
+        //relationship product and product category
+        builder.Entity<Product>()
+            .HasOne(e => e.Category)
+            .WithMany(c=>c.Products)
+            .HasForeignKey(e => e.CategoryId)
+            .HasPrincipalKey(t => t.Id);
+      
+        // Profiles
+        builder.Entity<Profile>().HasKey(p => p.Id);
+        builder.Entity<Profile>().Property(p => p.Id).IsRequired().ValueGeneratedOnAdd();
+        builder.Entity<Profile>().OwnsOne(p => p.Name, n =>
+        {
+            n.WithOwner().HasForeignKey("Id");
+            n.Property(p => p.FirstName).HasColumnName("FirstName");
+            n.Property(p => p.LastName).HasColumnName("LastName");
+        });
+
+        builder.Entity<Profile>().OwnsOne(p => p.Email, e =>
+        {
+            e.WithOwner().HasForeignKey("Id");
+            e.Property(a => a.Address).HasColumnName("EmailAddress");
+        });
+
+        builder.Entity<Profile>().OwnsOne(p => p.Phone, e =>
+        {
+            e.WithOwner().HasForeignKey("Id");
+            e.Property(a => a.Phone).HasColumnName("PhoneNumber");
+        });
+
+        builder.Entity<Profile>().OwnsOne(p => p.Photo, e =>
+        {
+            e.WithOwner().HasForeignKey("Id");
+            e.Property(a => a.Photo).HasColumnName("ProfilePhoto");
+        });
         
+        //profile and produtcs
+        builder.Entity<Product>()
+            .HasOne(e => e.User)
+            .WithMany(e=>e.Products)
+            .HasForeignKey(e => e.UserId)
+            .HasPrincipalKey(t => t.Id);
+        
+        //profile and favorite products
+        builder.Entity<FavoriteProduct>()
+            .HasOne(e => e.User)
+            .WithMany(e=>e.FavoriteProducts)
+            .HasForeignKey(e => e.UserId)
+            .HasPrincipalKey(t => t.Id);
+        
+        // IAM
+        builder.Entity<User>().HasKey(u => u.Id);
+        builder.Entity<User>().Property(u => u.Id).IsRequired().ValueGeneratedOnAdd();
+        builder.Entity<User>().Property(u => u.Email).IsRequired();
+        builder.Entity<User>().Property(u => u.PasswordHash).IsRequired();
 
         
-       
+        //country
+        builder.Entity<Country>().ToTable("Countries");
+        builder.Entity<Country>().HasKey(e => e.Id);
+        builder.Entity<Country>().Property(e => e.Id).ValueGeneratedOnAdd();
+        builder.Entity<Country>().Property(e => e.Name).IsRequired();
+        
+        //department
+        builder.Entity<Department>().ToTable("Departments");
+        builder.Entity<Department>().HasKey(e => e.Id);
+        builder.Entity<Department>().Property(e => e.Id).ValueGeneratedOnAdd();
+        builder.Entity<Department>().Property(e => e.Name).IsRequired();
+        
+        //district
+        builder.Entity<District>().ToTable("Districts");
+        builder.Entity<District>().HasKey(e => e.Id);
+        builder.Entity<District>().Property(e => e.Id).ValueGeneratedOnAdd();
+        builder.Entity<District>().Property(e => e.Name).IsRequired();
+        
+        //product and district
+        builder.Entity<Product>()
+            .HasOne(e => e.District)
+            .WithMany(e=>e.Products)
+            .HasForeignKey(e => e.DistrictId)
+            .HasPrincipalKey(t => t.Id);
+        
+        //relationship department and district
+        builder.Entity<District>()
+            .HasOne(e => e.Department)
+            .WithMany(e=>e.Districts)
+            .HasForeignKey(e => e.DepartmentId)
+            .HasPrincipalKey(t => t.Id);
+        
+        //relationship department and country
+        builder.Entity<Department>()
+            .HasOne(e => e.Country)
+            .WithMany(e=>e.Departments)
+            .HasForeignKey(e => e.CountryId)
+            .HasPrincipalKey(t => t.Id);
+        
+        //offer
+        builder.Entity<Offer>().ToTable("Offers");
+        builder.Entity<Offer>().HasKey(e => e.Id);
+        builder.Entity<Offer>().Property(e => e.Id).ValueGeneratedOnAdd();
+        builder.Entity<Offer>().Property(e => e.State).IsRequired();
+        
+        //many to many in offer
+        builder.Entity<Offer>()
+            .HasOne(e => e.ProductOwner)
+            .WithMany(p=>p.OffersAsOwner)
+            .HasForeignKey(e => e.ProductOwnerId)
+            .HasPrincipalKey(t => t.Id);
+        
+        builder.Entity<Offer>()
+            .HasOne(e => e.ProductExchange)
+            .WithMany(p=>p.OffersAsExchange)
+            .HasForeignKey(e => e.ProductExchangeId)
+            .HasPrincipalKey(t => t.Id);
+        
+        //favorite product
+        builder.Entity<FavoriteProduct>().ToTable("FavoriteProducts");
+        builder.Entity<FavoriteProduct>().HasKey(e => e.Id);
+        builder.Entity<FavoriteProduct>().Property(e => e.Id).ValueGeneratedOnAdd();
+        
+        //relationship favorite product and product
+        builder.Entity<FavoriteProduct>()
+            .HasOne(e => e.Product)
+            .WithMany(e=>e.FavoriteProducts)
+            .HasForeignKey(e => e.ProductId)
+            .HasPrincipalKey(t => t.Id);
+        
+        //membership
+        builder.Entity<Membership>().ToTable("Memberships");
+        builder.Entity<Membership>().HasKey(e => e.Id);
+        builder.Entity<Membership>().Property(e => e.Id).ValueGeneratedOnAdd();
+        builder.Entity<Membership>().Property(e => e.Name).IsRequired();
+        builder.Entity<Membership>().Property(e => e.Description).IsRequired();
+        builder.Entity<Membership>().Property(e => e.Price).IsRequired();
+        
+        //relationship membership and benfit
+        builder.Entity<Membership>()
+            .HasMany(e => e.Benefits)
+            .WithOne(e=>e.Membership)
+            .HasForeignKey(e => e.MembershipId)
+            .HasPrincipalKey(t => t.Id);
+        
+        //relation membership and user
+        builder.Entity<Membership>()
+            .HasMany(e => e.Users)
+            .WithOne(e=>e.Membership)
+            .HasForeignKey(e => e.MembershipId)
+            .HasPrincipalKey(t => t.Id);
+        
+        //review
+        builder.Entity<Review>().ToTable("Reviews");
+        builder.Entity<Review>().HasKey(e => e.Id);
+        builder.Entity<Review>().Property(e => e.Id).ValueGeneratedOnAdd();
+        builder.Entity<Review>().Property(e => e.Message).IsRequired();
+        builder.Entity<Review>().Property(e => e.State).IsRequired();
+        
+        //relationship review and profile
+        builder.Entity<Review>()
+            .HasOne(e => e.UserAuthor)
+            .WithMany(e=>e.ReviewsAuthor)
+            .HasForeignKey(e => e.ProfileAuthorId)
+            .HasPrincipalKey(t => t.Id);
+        
+        builder.Entity<Review>()
+            .HasOne(e => e.UserReceptor)
+            .WithMany(e=>e.ReviewsReceptor)
+            .HasForeignKey(e => e.ProfileReceptorId)
+            .HasPrincipalKey(t => t.Id);
+        
+        //relationship review and offer
+        builder.Entity<Review>()
+            .HasOne(e => e.Offer)
+            .WithMany(e=>e.Reviews)
+            .HasForeignKey(e => e.OfferId)
+            .HasPrincipalKey(t => t.Id);
+
+        
+        
+        
         // Apply SnakeCase Naming Convention
         builder.UseSnakeCaseWithPluralizedTableNamingConvention();
     }

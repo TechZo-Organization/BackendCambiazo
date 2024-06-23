@@ -10,7 +10,7 @@ public class ProductCategoryRepository(AppDbContext context) : BaseRepository<Pr
 {
     public Task<ProductCategory?> FindByName(string name)
     {
-        return context.Set<ProductCategory>()
+        return Context.Set<ProductCategory>()
             .Where(c => c.Name == name)
             .FirstOrDefaultAsync();
 

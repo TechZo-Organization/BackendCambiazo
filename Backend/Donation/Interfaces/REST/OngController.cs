@@ -5,8 +5,8 @@ using Backend.Donation.Domain.Services;
 using Backend.Donation.Interfaces.REST.Resources;
 using Backend.Donation.Interfaces.REST.Transform;
 using Microsoft.AspNetCore.Mvc;
-using Backend.Donation.Domain.Model.Commnads;
-using Backend.Donation.Domain.Model.Queries;
+using Backend.IAM.Infrastructure.Pipeline.Middleware.Attributes;
+
 
 namespace Backend.Donation.Interfaces.REST;
 
@@ -17,6 +17,7 @@ public class OngController(IOngCommandService ongCommandService,IOngQueryService
 {
     
     [HttpPost]
+    [AllowAnonymous]
     public async Task<IActionResult> CreateOng(CreateOngResource resource)
     {
         var createOngCommand = CreateOngCommandFromResourceAssembler.ToCommandFromResource(resource);
@@ -26,7 +27,8 @@ public class OngController(IOngCommandService ongCommandService,IOngQueryService
         return CreatedAtAction(nameof(GetOngById), new {ongId = ongResource.Id}, ongResource);
     }
     
-    [HttpGet]
+    [HttpGet]   
+    [AllowAnonymous]
     public async Task<IActionResult> GetAllOngs()
     {
         var getAllOngsQuery = new GetAllOngsQuery();
@@ -36,6 +38,7 @@ public class OngController(IOngCommandService ongCommandService,IOngQueryService
     }
     
     [HttpGet("{ongId:int}")]
+    [AllowAnonymous]
     public async Task<IActionResult> GetOngById(int ongId)
     {
         var getOngByIdQuery = new GetOngByIdQuery(ongId);
@@ -46,6 +49,7 @@ public class OngController(IOngCommandService ongCommandService,IOngQueryService
     }
     
     [HttpGet("byWordAddress/{wordAddress}")]
+    [AllowAnonymous]
     public async Task<IActionResult> GetAllOngByWordAddress(string wordAddress)
     {
         var getAllOngByWordAddress = new GetAllOngByWordAddress(wordAddress);
@@ -55,6 +59,7 @@ public class OngController(IOngCommandService ongCommandService,IOngQueryService
     }
     
     [HttpGet("byWordName/{wordName}")]
+    [AllowAnonymous]
     public async Task<IActionResult> GetAllOngByWordName(string wordName)
     {
         var getAllOngByWordName = new GetAllOngByWordName(wordName);
@@ -64,6 +69,7 @@ public class OngController(IOngCommandService ongCommandService,IOngQueryService
     }
     
     [HttpGet("byCategory/{categoryId}")]
+    [AllowAnonymous]
     public async Task<IActionResult> GetAllOngByCategory(int categoryId)
     {
         var getAllOngByCategory = new GetAllOngByCategory(categoryId);
@@ -73,6 +79,7 @@ public class OngController(IOngCommandService ongCommandService,IOngQueryService
     }
     
     [HttpDelete("{ongId:int}")]
+    [AllowAnonymous]
     public async Task<IActionResult> DeleteOng(int ongId)
     {
         var deleteOngCommand = new DeleteOngCommand(ongId);
@@ -83,6 +90,7 @@ public class OngController(IOngCommandService ongCommandService,IOngQueryService
     }
     
     [HttpPut("{ongId:int}")]
+    [AllowAnonymous]
     public async Task<IActionResult> UpdateOng(int ongId, CreateOngResource resource)
     {
         var updateOngCommand = new UpdateOngCommand(ongId, resource.Name, resource.Type, resource.AboutUs,
