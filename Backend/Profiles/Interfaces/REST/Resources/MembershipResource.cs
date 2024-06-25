@@ -7,4 +7,4 @@ public record MembershipResource(
         string Name,
         string Description,
         float Price,
-    ICollection<Benefit> Benefits);
+    List<string> Benefits);

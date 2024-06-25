@@ -9,6 +9,7 @@ public class CreateReviewCommandFromResourceAssembler
     {
         return new CreateReviewCommand(
             resource.Message,
+            resource.Score,
             resource.State,
             resource.ProfileAuthorId,
             resource.ProfileReceptorId,

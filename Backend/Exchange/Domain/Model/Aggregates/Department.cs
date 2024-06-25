@@ -12,6 +12,7 @@ public class Department
     
     public int CountryId { internal get; set; }
     public Country Country { internal get; set; }
+    
     [JsonIgnore]
     public IList<District> Districts { get; internal set; }
     
