@@ -10,6 +10,7 @@ public class ReviewResourceFromEntityAssembler
         return new ReviewResource(
             review.Id,
             review.Message,
+            review.Score,
             review.State,
             review.ProfileAuthorId,
             review.ProfileReceptorId,
