@@ -1,6 +1,7 @@
 using System.Text.Json.Serialization;
 using Backend.Exchange.Domain.Model.Aggregates;
 using Backend.Profiles.Domain.Model.Commands;
+using Backend.Profiles.Domain.Model.Entities;
 using Backend.Profiles.Domain.Model.ValueObjects;
 
 namespace Backend.Profiles.Domain.Model.Aggregates;
@@ -38,9 +39,15 @@ public partial class Profile
     public ProfilePhoto Photo { get; private set; }
     
     [JsonIgnore]
-    public ICollection<Product> Products { get; set; }
+    public ICollection<Product> Products { get; internal set; }
     [JsonIgnore]
-    public ICollection<FavoriteProduct> FavoriteProducts { get; set; }
+    public ICollection<FavoriteProduct> FavoriteProducts { get; internal set; }
+    public int MembershipId { get; set; }
+    public Membership Membership { internal get; set; }
+    [JsonIgnore]
+    public ICollection<Review> ReviewsAuthor { get; internal set; }
+    [JsonIgnore]
+    public ICollection<Review> ReviewsReceptor { get; internal set; }
 
     public string FullName => Name.FullName;
     

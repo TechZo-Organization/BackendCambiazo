@@ -180,6 +180,17 @@ builder.Services.AddScoped<IOfferRepository, OfferRepository>();
 builder.Services.AddScoped<IOfferCommandService, OfferCommandService>();
 builder.Services.AddScoped<IOfferQueryService, OfferQueryService>();
 
+builder.Services.AddScoped<IBenefitRepository, BenefitRepository>();
+builder.Services.AddScoped<IBenefitCommandService, BenefitCommandService>();
+
+builder.Services.AddScoped<IMembershipRepository, MembershipRepository>();
+builder.Services.AddScoped<IMembershipCommandService, MembershipCommandService>();
+builder.Services.AddScoped<IMembershipQueryService, MembershipQueryService>();
+
+builder.Services.AddScoped<IReviewRepository, ReviewRepository>();
+builder.Services.AddScoped<IReviewCommandService, ReviewCommandService>();
+builder.Services.AddScoped<IReviewQueryService, ReviewQueryService>();
+
 
 
 var app = builder.Build();

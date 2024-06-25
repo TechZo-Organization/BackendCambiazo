@@ -7,9 +7,9 @@ namespace Backend.Profiles.Interfaces.ACL.Services;
 
 public class ProfilesContextFacade(IProfileCommandService profileCommandService, IProfileQueryService profileQueryService) : IProfilesContextFacade
 {
-    public async Task<int> CreateProfile(string firstName, string lastName, string email, int phone, string photo)
+    public async Task<int> CreateProfile(string firstName, string lastName, string email, int phone, string photo,int membershipId)
     {
-        var createProfileCommand = new CreateProfileCommand(firstName, lastName, email, phone, photo);
+        var createProfileCommand = new CreateProfileCommand(firstName, lastName, email, phone, photo,membershipId);
         var profile = await profileCommandService.Handle(createProfileCommand);
         return profile?.Id ?? 0;
     }
