@@ -11,7 +11,7 @@ public class MembershipRepository(AppDbContext context) : BaseRepository<Members
     public override async Task<IEnumerable<Membership>> ListAsync()
     {
         return await context.Set<Membership>()
-            .Include(p=>p.Benefits)
+            .Include(p=>p.BenefitsRelation)
             .ToListAsync();
     }
 }

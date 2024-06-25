@@ -251,7 +251,7 @@ public class AppDbContext(DbContextOptions options) : DbContext(options)
         
         //relationship membership and benfit
         builder.Entity<Membership>()
-            .HasMany(e => e.Benefits)
+            .HasMany(e => e.BenefitsRelation)
             .WithOne(e=>e.Membership)
             .HasForeignKey(e => e.MembershipId)
             .HasPrincipalKey(t => t.Id);
