@@ -5,11 +5,11 @@ namespace Backend.Exchange.Domain.Model.Aggregates;
 
 public class District
 {
-    public int Id { get; set; }
+    public int Id {internal get; set; }
     public string Name { get; set; }
-    public int DepartmentId { get; set; }
+    public int DepartmentId { internal get; set; }
     
-    public Department Department { get; internal set; }
+    public Department Department { internal get; set; }
     
     [JsonIgnore]
     public ICollection<Product> Products { get; internal set; }

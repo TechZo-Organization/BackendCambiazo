@@ -51,7 +51,7 @@ public class AppDbContext(DbContextOptions options) : DbContext(options)
         
         builder.Entity<Ong>()
             .HasOne(e => e.Category)
-            .WithMany()
+            .WithMany(e=>e.Ongs)
             .HasForeignKey(e => e.CategoryId)
             .HasPrincipalKey(t => t.Id);
         
@@ -81,19 +81,19 @@ public class AppDbContext(DbContextOptions options) : DbContext(options)
         //relationship ong and all, if my ong have a listt or icollection of projects, socialnetworks, accountnumbers
         builder.Entity<Ong>()
             .HasMany(e => e.Projects)
-            .WithOne()
+            .WithOne(e=>e.Ong)
             .HasForeignKey(e => e.OngId)
             .HasPrincipalKey(t => t.Id);
         
         builder.Entity<Ong>()
             .HasMany(e => e.SocialNetworks)
-            .WithOne()
+            .WithOne(e=>e.Ong)
             .HasForeignKey(e => e.OngId)
             .HasPrincipalKey(t => t.Id);
         
         builder.Entity<Ong>()
             .HasMany(e => e.AccountNumbers)
-            .WithOne()
+            .WithOne(e=>e.Ong)
             .HasForeignKey(e => e.OngId)
             .HasPrincipalKey(t => t.Id);
         

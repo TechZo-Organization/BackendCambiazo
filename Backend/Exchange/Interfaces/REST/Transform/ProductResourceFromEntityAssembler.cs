@@ -16,7 +16,7 @@ public class ProductResourceFromEntityAssembler
             product.Photo,
             product.Boost,
             product.Available,
-            product.Category,
+            product.CategoryId,
             product.UserId,
             product.District
         );
