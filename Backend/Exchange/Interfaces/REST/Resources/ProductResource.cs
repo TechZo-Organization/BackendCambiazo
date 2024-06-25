@@ -14,7 +14,8 @@ public record ProductResource
     string Photo,
     bool Boost,
     bool Available,
-    ProductCategory Category,
+    int  CategoryId,
     int UserId,
     District District
+    
 );

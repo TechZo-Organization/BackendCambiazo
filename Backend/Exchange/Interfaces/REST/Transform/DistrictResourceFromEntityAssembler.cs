@@ -7,6 +7,6 @@ public class DistrictResourceFromEntityAssembler
 {
     public static DistrictResource ToResourceFromEntity(District entity)
     {
-        return new DistrictResource(entity.Id, entity.Name, entity.Department);
+        return new DistrictResource(entity.Id, entity.Name);
     }
 }

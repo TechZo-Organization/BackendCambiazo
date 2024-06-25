@@ -1,4 +1,5 @@
 using Backend.Exchange.Domain.Model.Commnads.CountryCommands;
+using Backend.Exchange.Domain.Model.Queries.CountryQueries;
 using Backend.Exchange.Domain.Services;
 using Backend.Exchange.Interfaces.REST.Resources;
 using Backend.Exchange.Interfaces.REST.Transform;
@@ -9,7 +10,7 @@ namespace Backend.Exchange.Interfaces.REST;
 
 [ApiController]
 [Route("api/v1/[controller]")]
-public class CountryController(ICountryCommandService countryCommandService): ControllerBase
+public class CountryController(ICountryCommandService countryCommandService,ICountryQueryService countryQueryService): ControllerBase
 {
     
     [HttpPost]
@@ -47,6 +48,18 @@ public class CountryController(ICountryCommandService countryCommandService): Co
         var countryResource = CountryResourceFromEntityAssembler.ToResourceFromEntity(country);
         return Ok(countryResource);
     }
+    
+    //get all
+    [HttpGet]
+    [AllowAnonymous]
+    public async Task<IActionResult> GetAllCountries()
+    {
+        var countryQuery = new GetAllCountriesQuery();
+        var countries = await countryQueryService.Handle(countryQuery);
+        var countryResources = countries.Select( CountryResourceFromEntityAssembler.ToResourceFromEntity);
+        return Ok(countryResources);
+    }
+    
     
     
 }
