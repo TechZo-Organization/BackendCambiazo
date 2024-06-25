@@ -13,4 +13,12 @@ public class CountryRepository(AppDbContext context) : BaseRepository<Country>(c
         return await Context.Set<Country>()
             .FirstOrDefaultAsync(c => c.Name == name);
     }
+
+    public override async Task<IEnumerable<Country>> ListAsync()
+    {
+        return await Context.Set<Country>()
+            .Include(c => c.Departments)
+            .ThenInclude(d => d.Districts)
+            .ToListAsync();
+    }
 }
