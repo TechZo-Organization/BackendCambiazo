@@ -7,6 +7,6 @@ public class CountryResourceFromEntityAssembler
 {
     public static CountryResource ToResourceFromEntity(Country entity)
     {
-        return new CountryResource(entity.Id, entity.Name);
+        return new CountryResource(entity.Id, entity.Name, entity.Departments);
     }
 }
