@@ -4,7 +4,7 @@ namespace Backend.Donation.Domain.Model.Aggregates;
 
 public class AccountNumber
 {
-    public int Id { get; set; }
+    public int Id { internal get; set; }
     public string Name { get; set; }
     public string CCI { get; set; }
     public string Number { get; set; }

@@ -4,7 +4,7 @@ namespace Backend.Donation.Domain.Model.Aggregates;
 
 public class SocialNetwork
 {
-    public int Id { get; set; }
+    public int Id { internal get; set; }
     public string Name { get; set; }
     public string Url { get; set; }
     public string Icon { get; set; }
