@@ -21,7 +21,7 @@ public class Ong
     public string UrlLogo {get;set;}
     public string UrlWebSite {get;set;}
     public string AttentionSchedule { get; set; }
-
+    
     public int CategoryId {get;set;}
     [JsonIgnore]
     public ICollection<Project> Projects { get; internal set; }
@@ -30,7 +30,7 @@ public class Ong
     [JsonIgnore]
     public ICollection<AccountNumber> AccountNumbers { get;internal set; }
 
-    public Category Category {get;internal set;}
+    public Category Category { get; set;}
     
     
     public Ong( string name, string type, string aboutUs, string missionVision, string supportForm, string address, string email, string number, string urlLogo, string urlWebSite, string attentionSchedule,int categoryId)

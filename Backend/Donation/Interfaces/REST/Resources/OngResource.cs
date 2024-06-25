@@ -18,5 +18,5 @@ public record OngResource(
     ICollection<Domain.Model.Aggregates.Project> Projects,
     ICollection<Domain.Model.Aggregates.SocialNetwork> SocialNetworks,
     ICollection<Domain.Model.Aggregates.AccountNumber> AccountNumbers,
-    Category Category
+    int CategoryId
     );

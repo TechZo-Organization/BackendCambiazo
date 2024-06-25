@@ -24,7 +24,7 @@ public class OngResourceFormEntityAssembler
             ong.Projects,
             ong.SocialNetworks,
             ong.AccountNumbers,
-            ong.Category
+            ong.CategoryId
         );
     }
 }

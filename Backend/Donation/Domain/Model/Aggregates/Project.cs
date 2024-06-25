@@ -6,7 +6,7 @@ namespace Backend.Donation.Domain.Model.Aggregates;
 
 public class Project
 {
-    public int Id { get; set; }
+    public int Id { internal get; set; }
     public string Name { get; set; }
     public string Description { get; set; }
     public int OngId {internal get; set; }
