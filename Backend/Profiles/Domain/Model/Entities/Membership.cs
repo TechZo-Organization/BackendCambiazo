@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Text.Json.Serialization;
 using Backend.Profiles.Domain.Model.Aggregates;
 using Backend.Profiles.Domain.Model.Commands.MembershipCommands;
@@ -10,11 +11,12 @@ public class Membership
     public string Name { get; set; }
     public string Description { get; set; }
     public float Price { get; set; }
-    
-    [JsonIgnore]
-    public ICollection<Benefit> Benefits { get; internal set; }
     [JsonIgnore]
     public ICollection<Profile> Users { get;internal set; }
+    
+    [JsonIgnore]
+    public IList<Benefit> BenefitsRelation { get; internal set; }
+    public List<string> Benefits => BenefitsRelation.Select(b => b.Description).ToList();
     
     public Membership()
     {

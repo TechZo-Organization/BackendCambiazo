@@ -7,6 +7,7 @@ public partial class Review
 {
     public int Id { get; set; }
     public string Message { get; set; }
+    public int Score { get; set; }
     public string State { get; set; }
     public int ProfileAuthorId { get; set; }
     public int ProfileReceptorId { get; set; }
@@ -16,9 +17,10 @@ public partial class Review
     public Profile UserReceptor { get; set; }
     public Offer Offer { get; set; }
     
-    public Review(string message, string state, int profileAuthorId, int profileReceptorId, int offerId)
+    public Review(string message, int score,string state, int profileAuthorId, int profileReceptorId, int offerId)
     {
         Message = message;
+        Score = score;
         State = state;
         ProfileAuthorId = profileAuthorId;
         ProfileReceptorId = profileReceptorId;
@@ -34,6 +36,7 @@ public partial class Review
     {
         Message = command.Message;
         State = command.State;
+        Score = command.Score;
         ProfileAuthorId = command.UserAuthorId;
         ProfileReceptorId = command.UserReceptorId;
         OfferId = command.OfferId;

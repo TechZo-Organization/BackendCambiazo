@@ -168,6 +168,7 @@ builder.Services.AddScoped<IProductCategoryQueryService, ProductCategoryQuerySer
 
 builder.Services.AddScoped<ICountryRepository, CountryRepository>();
 builder.Services.AddScoped<ICountryCommandService, CountryCommandService>();
+builder.Services.AddScoped<ICountryQueryService, CountryQueryService>();
 
 builder.Services.AddScoped<IDepartmentRepository, DepartmentRepository>();
 builder.Services.AddScoped<IDepartmentCommandService, DepartmentCommandService>();
