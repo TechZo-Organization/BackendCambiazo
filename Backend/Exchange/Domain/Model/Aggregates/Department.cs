@@ -14,9 +14,10 @@ public class Department
     public Country Country { internal get; set; }
     
     [JsonIgnore]
-    public ICollection<District> Districts { get; internal set; }
+    public IList<District> Districts { get; internal set; }
     
     public List<string> Cities => Districts.Select(x => x.Name).ToList();
+   
     public Department()
     {
         
