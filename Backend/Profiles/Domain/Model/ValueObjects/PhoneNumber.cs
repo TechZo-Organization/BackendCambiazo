@@ -1,6 +1,6 @@
 namespace Backend.Profiles.Domain.Model.ValueObjects;
 
-public record PhoneNumber(int Phone)
+public record PhoneNumber(string Phone)
 {
-    public PhoneNumber() : this(Phone:0){}
+    public PhoneNumber() : this(String.Empty){}
 }
