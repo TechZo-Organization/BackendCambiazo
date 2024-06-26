@@ -9,7 +9,7 @@ public class District
     public string Name { get; set; }
     public int DepartmentId { internal get; set; }
     
-    public Department Department { internal get; set; }
+    public Department Department { get; set; }
     
     [JsonIgnore]
     public ICollection<Product> Products { get; internal set; }

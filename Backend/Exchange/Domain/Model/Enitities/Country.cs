@@ -6,7 +6,7 @@ namespace Backend.Exchange.Domain.Model.Enitities;
 
 public class Country
 {
-    public int Id { get; set; }
+    public int Id { internal get; set; }
     public string Name { get; set; }
     
     [JsonIgnore]
