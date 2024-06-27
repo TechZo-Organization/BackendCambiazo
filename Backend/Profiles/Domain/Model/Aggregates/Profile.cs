@@ -41,6 +41,8 @@ public partial class Profile
         Email = new EmailAddress(command.Email);
         Phone = new PhoneNumber(command.Phone);
         Photo = new ProfilePhoto(command.Photo);
+        MembershipId = command.MembershipId;
+
     }
     
     public int Id { get; }
