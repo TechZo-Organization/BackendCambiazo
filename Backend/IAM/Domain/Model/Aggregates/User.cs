@@ -1,4 +1,6 @@
 using System.Text.Json.Serialization;
+using Backend.IAM.Domain.Model.Commands;
+using Microsoft.EntityFrameworkCore;
 
 namespace Backend.IAM.Domain.Model.Aggregates;
 
@@ -22,4 +24,5 @@ public class User(string email, string passwordHash)
         PasswordHash = passwordHash;
         return this;
     }
+    
 }

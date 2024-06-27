@@ -42,4 +42,43 @@ public class UserCommandService(
             throw new Exception($"An error occurred while creating user: {e.Message}");
         }
     }
+    
+    public async Task<User> Handle(UpdateUserCommand command)
+    {
+        var user = await userRepository.FindByIdAsync(command.id);
+        if (user == null)
+            throw new Exception($"User with id {command.id} not found");
+
+        user.UpdateUserEmail(command.email);
+        user.UpdatePasswordHash(hashingService.HashPassword(command.passwordHash));
+        
+        try
+        {
+            userRepository.Update(user);
+            await unitOfWork.CompleteAsync();
+            return user;
+        }
+        catch (Exception e)
+        {
+            throw new Exception($"An error occurred while updating user: {e.Message}");
+        }
+    }
+    
+    public async Task<User> Handle(DeleteUserCommand command)
+    {
+        var user = await userRepository.FindByIdAsync(command.id);
+        if (user == null)
+            throw new Exception($"User with id {command.id} not found");
+        try
+        {
+            userRepository.Remove(user);
+            await unitOfWork.CompleteAsync();
+            return user;
+
+        }
+        catch (Exception e)
+        {
+            throw new Exception($"An error occurred while deleting user: {e.Message}");
+        }
+    }
 }
