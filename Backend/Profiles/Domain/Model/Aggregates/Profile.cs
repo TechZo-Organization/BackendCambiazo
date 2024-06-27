@@ -35,6 +35,14 @@ public partial class Profile
         MembershipId = command.MembershipId;
     }
     
+    public void Update(UpdateProfileCommand command)
+    {
+        Name = new PersonName(command.Name);
+        Email = new EmailAddress(command.Email);
+        Phone = new PhoneNumber(command.Phone);
+        Photo = new ProfilePhoto(command.Photo);
+    }
+    
     public int Id { get; }
     public PersonName Name { get; private set; }
     public EmailAddress Email { get; private set; }

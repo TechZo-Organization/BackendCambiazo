@@ -1,5 +1,6 @@
 using System.Net.Mime;
 using Backend.IAM.Infrastructure.Pipeline.Middleware.Attributes;
+using Backend.Profiles.Domain.Model.Commands;
 using Backend.Profiles.Domain.Model.Queries;
 using Backend.Profiles.Domain.Services;
 using Backend.Profiles.Interfaces.REST.Resources;
@@ -40,6 +41,28 @@ public class ProfilesController(IProfileCommandService profileCommandService, IP
     {
         var getProfileByIdQuery = new GetProfileByIdQuery(profileId);
         var profile = await profileQueryService.Handle(getProfileByIdQuery);
+        if (profile == null) return NotFound();
+        var profileResource = ProfileResourceFromEntityAssembler.ToResourceFromEntity(profile);
+        return Ok(profileResource);
+    }
+    
+    [HttpPut("{profileId:int}")]
+    [AllowAnonymous]
+    public async Task<IActionResult> UpdateProfile(int profileId, CreateProfileResource resource)
+    {
+        var updateProfileCommand = new UpdateProfileCommand(profileId, resource.Name, resource.Email, resource.Phone, resource.Photo,resource.MembershipId);
+        var profile = await profileCommandService.Handle(updateProfileCommand);
+        if (profile == null) return NotFound();
+        var profileResource = ProfileResourceFromEntityAssembler.ToResourceFromEntity(profile);
+        return Ok(profileResource);
+    }
+    
+    [HttpDelete("{profileId:int}")]
+    [AllowAnonymous]
+    public async Task<IActionResult> DeleteProfile(int profileId)
+    {
+        var deleteProfileCommand = new DeleteProfileCommand(profileId);
+        var profile = await profileCommandService.Handle(deleteProfileCommand);
         if (profile == null) return NotFound();
         var profileResource = ProfileResourceFromEntityAssembler.ToResourceFromEntity(profile);
         return Ok(profileResource);

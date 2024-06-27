@@ -23,4 +23,50 @@ public class ProfileCommandService(IProfileRepository profileRepository, IUnitOf
             return null;
         }
     }
+    
+    public async Task<Profile?> Handle(UpdateProfileCommand command)
+    {
+        var profile = await profileRepository.FindByIdAsync(command.Id);
+        if (profile == null)
+        {
+            Console.WriteLine($"Profile with id {command.Id} not found");
+            return null;
+        }
+        
+        profile.Update(command);
+        try
+        {
+            await unitOfWork.CompleteAsync();
+            return profile;
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine($"An error occurred while updating the profile: {e.Message}");
+            return null;
+        }
+    }
+    
+    public async Task<Profile?> Handle(DeleteProfileCommand command)
+    {
+        var profile = await profileRepository.FindByIdAsync(command.Id);
+        if (profile == null)
+        {
+            Console.WriteLine($"Profile with id {command.Id} not found");
+            return null;
+        }
+        
+        try
+        {
+            profileRepository.Remove(profile);
+            await unitOfWork.CompleteAsync();
+            return profile;
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine($"An error occurred while deleting the profile: {e.Message}");
+            return null;
+        }
+    }
+    
+    
 }
