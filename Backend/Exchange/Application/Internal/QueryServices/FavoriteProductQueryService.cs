@@ -13,10 +13,9 @@ public class FavoriteProductQueryService(IFavoriteProductRepository favoriteProd
         return await favoriteProductRepository.ListAsync();
     }
     
-    public async Task<IEnumerable<FavoriteProduct>> Handle(GetAllFavoriteProductsQueryByUserQuery query)
+    public async Task<IEnumerable<FavoriteProduct>> Handle(GetAllFavoriteProductsByUserIdQuery query)
     {
-        return await favoriteProductRepository.GetAllByUserId(query.UserId);
+        return await favoriteProductRepository.GetAllFavoriteProductsByUserId(query.UserId);
     }
-    
     
 }

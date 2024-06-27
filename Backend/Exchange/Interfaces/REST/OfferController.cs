@@ -58,7 +58,7 @@ public class OfferController(IOfferCommandService offerCommandService,IOfferQuer
         return Ok(offerResources);
     }
 
-    [HttpGet("/user-own/{userOwnId:int}")]
+    [HttpGet("user-own/{userOwnId:int}")]
     [AllowAnonymous]
     public async Task<IActionResult> GetAllOffersByUserOwnId(int userOwnId)
     {
@@ -68,7 +68,7 @@ public class OfferController(IOfferCommandService offerCommandService,IOfferQuer
         return Ok(offerResources);
     }
     
-    [HttpGet("/user-exchange/{userExchangeId:int}")]
+    [HttpGet("user-change/{userExchangeId:int}")]
     [AllowAnonymous]
     public async Task<IActionResult> GetAllOffersByUserExchangeId(int userExchangeId)
     {
