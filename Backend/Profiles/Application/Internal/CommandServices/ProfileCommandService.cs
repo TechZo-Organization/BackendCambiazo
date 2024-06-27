@@ -36,6 +36,7 @@ public class ProfileCommandService(IProfileRepository profileRepository, IUnitOf
         profile.Update(command);
         try
         {
+            profileRepository.Update(profile);
             await unitOfWork.CompleteAsync();
             return profile;
         }
