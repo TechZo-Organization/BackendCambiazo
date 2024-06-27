@@ -21,7 +21,8 @@ public class DistrictController(IDistrictCommandService commandService,IDistrict
         var district = await commandService.Handle(createDistrictCommand);
         if (district is null) return BadRequest();
         var districtResource = DistrictResourceFromEntityAssembler.ToResourceFromEntity(district);
-        return CreatedAtAction(nameof(GetDistrictById), new {districtId = districtResource.Id}, districtResource);
+        //return CreatedAtAction(nameof(GetDistrictById), new {districtId = districtResource.Id}, districtResource);
+        return Ok(districtResource);
     }
     
     //put
@@ -48,17 +49,17 @@ public class DistrictController(IDistrictCommandService commandService,IDistrict
         return Ok(districtResource);
     }
     
-    [HttpGet("{districtId:int}")]
-    [AllowAnonymous]
-    public async Task<IActionResult> GetDistrictById(int districtId)
-    {
-        var getDistrictByIdQuery = new GetDistrictByIdQuery(districtId);
-        var district = await districtQueryService.Handle(getDistrictByIdQuery);
-        if (district == null) return NotFound();
-        var districtResource = DistrictResourceFromEntityAssembler.ToResourceFromEntity(district);
-        return Ok(districtResource);
-    }
-    
+   [HttpGet("name/{name}")]
+   [AllowAnonymous]
+   public async Task<IActionResult> Get(string name)
+   {
+       var getDistrictByIdQuery = new GetDistrictByNameQuery(name);
+       var district = await districtQueryService.Handle(getDistrictByIdQuery);
+       if (district == null) return NotFound();
+       var districtResource = DistrictResourceFromEntityAssembler.ToResourceFromEntity(district);
+       return Ok(districtResource);
+   }
+   
     [HttpGet]
     [AllowAnonymous]
     public async Task<IActionResult> GetAllDistricts()

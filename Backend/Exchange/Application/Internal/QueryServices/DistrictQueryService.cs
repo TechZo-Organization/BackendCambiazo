@@ -13,9 +13,9 @@ public class DistrictQueryService(IDistrictRepository districtRepository) : IDis
         return await districtRepository.ListAsync();
     }
     
-    public async Task<District?> Handle(GetDistrictByIdQuery query)
+    public async Task<District?> Handle(GetDistrictByNameQuery query)
     {
-        return await districtRepository.FindByIdAsync(query.Id);
+        return await districtRepository.GetByNameAsync(query.name);
     }
     
     

@@ -7,5 +7,5 @@ namespace Backend.Exchange.Domain.Services;
 public interface IDistrictQueryService
 {
     Task<IEnumerable<District>> Handle(GetAllDistrictsQuery query);
-    Task<District?> Handle(GetDistrictByIdQuery query);
+    Task<District?> Handle(GetDistrictByNameQuery query);
 }
