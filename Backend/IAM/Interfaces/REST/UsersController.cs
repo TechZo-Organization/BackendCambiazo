@@ -13,6 +13,7 @@ namespace Backend.IAM.Interfaces.REST;
 [Produces(MediaTypeNames.Application.Json)]
 public class UsersController(IUserQueryService userQueryService) : ControllerBase
 {
+    [AllowAnonymous]
     [HttpGet("{id}")]
     public async Task<IActionResult> GetUserById(int id)
     {
@@ -22,6 +23,7 @@ public class UsersController(IUserQueryService userQueryService) : ControllerBas
         return Ok(userResource);
     }
 
+    [AllowAnonymous]
     [HttpGet]
     public async Task<IActionResult> GetAllUsers()
     {

@@ -1,4 +1,5 @@
 using System.Net.Mime;
+using Backend.IAM.Infrastructure.Pipeline.Middleware.Attributes;
 using Backend.Profiles.Domain.Model.Queries;
 using Backend.Profiles.Domain.Services;
 using Backend.Profiles.Interfaces.REST.Resources;
@@ -13,6 +14,7 @@ namespace Backend.Profiles.Interfaces.REST;
 public class ProfilesController(IProfileCommandService profileCommandService, IProfileQueryService profileQueryService) : ControllerBase
 {
     [HttpPost]
+    [AllowAnonymous]
     public async Task<IActionResult> CreateProfile(CreateProfileResource resource)
     {
         var createProfileCommand = CreateProfileCommandFromResourceAssembler.ToCommandFromResource(resource);
@@ -23,6 +25,7 @@ public class ProfilesController(IProfileCommandService profileCommandService, IP
     }
 
     [HttpGet]
+    [AllowAnonymous]
     public async Task<IActionResult> GetAllProfiles()
     {
         var getAllProfilesQuery = new GetAllProfilesQuery();
@@ -32,6 +35,7 @@ public class ProfilesController(IProfileCommandService profileCommandService, IP
     }
 
     [HttpGet("{profileId:int}")]
+    [AllowAnonymous]
     public async Task<IActionResult> GetProfileById(int profileId)
     {
         var getProfileByIdQuery = new GetProfileByIdQuery(profileId);

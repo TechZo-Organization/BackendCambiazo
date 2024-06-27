@@ -11,12 +11,13 @@ public class Department
     public string Name { get; set; }
     
     public int CountryId { internal get; set; }
-    public Country Country { internal get; set; }
+    public Country Country {   get; set; }
     
     [JsonIgnore]
-    public IList<District> Districts { get; internal set; }
-    
-    public List<string> Cities => Districts.Select(x => x.Name).ToList();
+    public IList<District> Districts { get; internal set; } = new List<District>();
+    public List<string> Cities => Districts?.Select(x => x.Name).ToList() ?? new List<string>();
+
+   
     public Department()
     {
         

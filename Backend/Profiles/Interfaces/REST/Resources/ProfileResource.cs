@@ -1,3 +1,3 @@
 namespace Backend.Profiles.Interfaces.REST.Resources;
 
-public record ProfileResource(int Id, string FullName, string Email, int Phone, string Photo, int MembershipId);
+public record ProfileResource(int Id, string Name, string Email, string Phone, string Photo, int MembershipId);

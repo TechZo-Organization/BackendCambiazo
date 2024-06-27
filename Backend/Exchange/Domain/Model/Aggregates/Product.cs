@@ -30,7 +30,6 @@ public class Product
     [JsonIgnore]
     public ICollection<FavoriteProduct> FavoriteProducts { get; set; }
     
-    
     public Product(string name, string description, string objectChange, float price, string photo, bool boost, bool available, int categoryId,int userId, int districtId)
     {
         Name = name;

@@ -14,22 +14,25 @@ public partial class Profile
         Email = new EmailAddress();
         Phone = new PhoneNumber();
         Photo = new ProfilePhoto();
+        MembershipId = 1;
     }
 
-    public Profile(string firstName, string lastName, string email, int phone, string photo)
+    public Profile(string firstName, string email, string phone, string photo, int membershipId)
     {
-        Name = new PersonName(firstName, lastName);
+        Name = new PersonName(firstName);
         Email = new EmailAddress(email);
         Phone = new PhoneNumber(phone);
         Photo = new ProfilePhoto(photo);
+        MembershipId = membershipId;
     }
 
     public Profile(CreateProfileCommand command)
     {
-        Name = new PersonName(command.FirstName, command.LastName);
+        Name = new PersonName(command.Name);
         Email = new EmailAddress(command.Email);
         Phone = new PhoneNumber(command.Phone);
         Photo = new ProfilePhoto(command.Photo);
+        MembershipId = command.MembershipId;
     }
     
     public int Id { get; }
@@ -53,7 +56,7 @@ public partial class Profile
     
     public string EmailAddress => Email.Address;
     
-    public int PhoneNumber => Phone.Phone;
+    public string PhoneNumber => Phone.Phone;
 
     public string ProfilePhoto => Photo.Photo;
 }

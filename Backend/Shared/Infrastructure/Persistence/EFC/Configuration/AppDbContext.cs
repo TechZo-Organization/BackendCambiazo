@@ -128,8 +128,7 @@ public class AppDbContext(DbContextOptions options) : DbContext(options)
         builder.Entity<Profile>().OwnsOne(p => p.Name, n =>
         {
             n.WithOwner().HasForeignKey("Id");
-            n.Property(p => p.FirstName).HasColumnName("FirstName");
-            n.Property(p => p.LastName).HasColumnName("LastName");
+            n.Property(p => p.FirstName).HasColumnName("Name");
         });
 
         builder.Entity<Profile>().OwnsOne(p => p.Email, e =>
