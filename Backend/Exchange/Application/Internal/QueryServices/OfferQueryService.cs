@@ -11,4 +11,14 @@ public class OfferQueryService(IOfferRepository offerRepository): IOfferQuerySer
     {
         return await offerRepository.ListAsync();
     }
+    
+    public async Task <IEnumerable<Offer>> Handle(GetAllOffersByUserOwnIdQuery query)
+    {
+        return await offerRepository.GetAllOffersByUserOwnIdAsync(query.UserOwnId);
+    }
+    
+    public async Task <IEnumerable<Offer>> Handle(GetAllOfferByUserChangeIdQuery query)
+    {
+        return await offerRepository.GetAllOffersByUserExchangeIdAsync(query.UserChangeId);
+    }
 }
