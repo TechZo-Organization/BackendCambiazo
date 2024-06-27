@@ -57,5 +57,25 @@ public class OfferController(IOfferCommandService offerCommandService,IOfferQuer
         var offerResources = offers.Select(OfferResourceFromEntityAssembler.ToResourceFromEntity);
         return Ok(offerResources);
     }
+
+    [HttpGet("user-own/{userOwnId:int}")]
+    [AllowAnonymous]
+    public async Task<IActionResult> GetAllOffersByUserOwnId(int userOwnId)
+    {
+        var getAllOffersByUserOwnIdQuery = new GetAllOffersByUserOwnIdQuery(userOwnId);
+        var offers = await offerQueryService.Handle(getAllOffersByUserOwnIdQuery);
+        var offerResources = offers.Select(OfferResourceFromEntityAssembler.ToResourceFromEntity);
+        return Ok(offerResources);
+    }
+    
+    [HttpGet("user-change/{userExchangeId:int}")]
+    [AllowAnonymous]
+    public async Task<IActionResult> GetAllOffersByUserExchangeId(int userExchangeId)
+    {
+        var getAllOffersByUserExchangeIdQuery = new GetAllOfferByUserChangeIdQuery(userExchangeId);
+        var offers = await offerQueryService.Handle(getAllOffersByUserExchangeIdQuery);
+        var offerResources = offers.Select(OfferResourceFromEntityAssembler.ToResourceFromEntity);
+        return Ok(offerResources);
+    }
     
 }

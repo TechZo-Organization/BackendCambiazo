@@ -8,4 +8,6 @@ public interface IFavoriteProductRepository : IBaseRepository<FavoriteProduct>
     Task<List<FavoriteProduct>> GetAllByUserId(int userId);
     Task<FavoriteProduct?> GetByUserIdAndProductId(int userId, int productId);
 
+    Task<List<FavoriteProduct>>GetAllFavoriteProductsByUserId(int userId);
+
 }

@@ -21,4 +21,11 @@ public class FavoriteProductRepository(AppDbContext context) : BaseRepository<Fa
             .Where(f => f.UserId == userId && f.ProductId == productId)
             .FirstOrDefaultAsync();
     }
+    
+    public Task<List<FavoriteProduct>>GetAllFavoriteProductsByUserId(int userId)
+    {
+        return Context.Set<FavoriteProduct>()
+            .Where(f => f.UserId == userId)
+            .ToListAsync();
+    }
 }

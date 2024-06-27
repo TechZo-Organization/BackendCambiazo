@@ -6,6 +6,7 @@ namespace Backend.Exchange.Domain.Services;
 public interface IProductFavoriteQueryService
 {
     Task<IEnumerable<FavoriteProduct>> Handle(GetAllFavoriteProductsQuery query);
-    Task<IEnumerable<FavoriteProduct>> Handle(GetAllFavoriteProductsQueryByUserQuery query);
+    
+    Task<IEnumerable<FavoriteProduct>> Handle(GetAllFavoriteProductsByUserIdQuery query);
     
 }

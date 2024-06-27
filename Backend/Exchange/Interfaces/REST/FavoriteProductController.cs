@@ -45,18 +45,15 @@ public class FavoriteProductController(IFavoriteProductCommandService favoritePr
         var favoriteProductResources = favoriteProducts.Select(FavoriteProductResourceFromEntityAssembler.ToResourceFromEntity);
         return Ok(favoriteProductResources);
     }
-    
-    [HttpGet("{userId:int}")]
+
+
+    [HttpGet("user/{userId:int}")]
     [AllowAnonymous]
-    public async Task<IActionResult> GetAllFavoriteProductsByUser(int userId)
+    public async Task<IActionResult> GetAllFavoriteProductsByUserId(int userId)
     {
-        var getAllFavoriteProductsByUserQuery = new GetAllFavoriteProductsQueryByUserQuery(userId);
-        var favoriteProducts = await productFavoriteQueryService.Handle(getAllFavoriteProductsByUserQuery);
+        var getAllFavoriteProductsByUserId = new GetAllFavoriteProductsByUserIdQuery(userId);
+        var favoriteProducts = await productFavoriteQueryService.Handle(getAllFavoriteProductsByUserId);
         var favoriteProductResources = favoriteProducts.Select(FavoriteProductResourceFromEntityAssembler.ToResourceFromEntity);
         return Ok(favoriteProductResources);
     }
-    
-    
-    
-    
 }

@@ -1,5 +1,6 @@
 
 using Backend.Exchange.Domain.Model.Commnads.ProductCommands;
+using Backend.Exchange.Domain.Model.Queries.FavoriteProductQueries;
 using Backend.Exchange.Domain.Model.Queries.ProductQueries;
 using Backend.Exchange.Domain.Services;
 using Backend.Exchange.Interfaces.REST.Resources;
@@ -130,12 +131,5 @@ public class ProductController(IProductQueryService productQueryService,IProduct
         return Ok(productResource);
     }
     
-    
-   
-   
-    
-    
-    
-
     
 }

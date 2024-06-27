@@ -192,7 +192,9 @@ builder.Services.AddScoped<IReviewRepository, ReviewRepository>();
 builder.Services.AddScoped<IReviewCommandService, ReviewCommandService>();
 builder.Services.AddScoped<IReviewQueryService, ReviewQueryService>();
 
-
+builder.Services.AddScoped<IFavoriteProductRepository, FavoriteProductRepository>();
+builder.Services.AddScoped<IFavoriteProductCommandService, FavoriteProductCommandService>();
+builder.Services.AddScoped<IProductFavoriteQueryService, FavoriteProductQueryService>();
 
 var app = builder.Build();
 

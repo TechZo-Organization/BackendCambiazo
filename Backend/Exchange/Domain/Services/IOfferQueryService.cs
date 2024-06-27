@@ -6,4 +6,8 @@ namespace Backend.Exchange.Domain.Services;
 public interface IOfferQueryService
 {
     Task<IEnumerable<Offer>> Handle(GetAllOffersQuery query);
+    
+    Task<IEnumerable<Offer>> Handle(GetAllOffersByUserOwnIdQuery query);
+    
+    Task<IEnumerable<Offer>> Handle(GetAllOfferByUserChangeIdQuery query);
 }
